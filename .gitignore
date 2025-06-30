@@ -1,0 +1,40 @@
+# Node.js dependencies
+node_modules/
+
+# Log files
+*.log
+
+# Debugger config files
+.vscode/
+.idea/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# npm package lock files (if needed for specific environment)
+package-lock.json
+yarn.lock
+
+# Build output
+/dist/
+/build/
+
+# Environment variables
+.env
+
+# Test coverage reports
+coverage/
+
+# Optional, if you use TypeScript
+*.tsbuildinfo
+
+# Optional, if you use VS Code or other IDE-specific files
+.vscode/
+
+# Optional, if using Next.js
+.next/
+
+# Optional, if using Create React App
+/.pnp/
+/.pnp.js
