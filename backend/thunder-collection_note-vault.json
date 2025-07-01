@@ -1,0 +1,35 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "note-vault",
+    "collectionId": "5815493e-1062-4376-a7e7-7d4e790f84f3",
+    "dateExported": "2025-06-30T10:32:14.410Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "1cf8d5b1-0d07-4f33-9a4d-7be0d0d81017",
+            "colId": "5815493e-1062-4376-a7e7-7d4e790f84f3",
+            "containerId": "",
+            "name": "/api/notes",
+            "url": "http://localhost:5000/api/notes",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2025-06-30T10:31:34.772Z",
+            "modified": "2025-06-30T10:31:49.245Z",
+            "headers": []
+        },
+        {
+            "_id": "7364f3b4-a639-441b-a18a-d9c76e97611b",
+            "colId": "5815493e-1062-4376-a7e7-7d4e790f84f3",
+            "containerId": "",
+            "name": "api/nodes/id",
+            "url": "http://localhost:5000/api/notes/1",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2025-06-30T10:32:02.732Z",
+            "modified": "2025-06-30T10:32:07.686Z",
+            "headers": []
+        }
+    ],
+    "ref": "NF2uI-84e57HB1IRTscJ1mz3ph9UP2c6h4iwX0tHox6M2SPItv6QCsKLUex7MEz1vijCpALAQmi0ixGCQolbLQ"
+}
