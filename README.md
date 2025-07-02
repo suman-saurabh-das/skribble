@@ -47,6 +47,12 @@ Creating a note taking application to understand how fullstack applications are 
 - Install dependencies : `npm install`
 - Run the project : `npm run dev`
 
+#### Frontend setup
+
+- Navigate to project directory : `cd frontend`
+- Install dependencies : `npm install`
+- Run the project : `npm run dev`
+
 ## Credits
 
 List of contributors:
@@ -56,10 +62,15 @@ List of contributors:
 
 ## Development Milestones
 
-### [01] Created node.js server & express.js API.
+### [01] Created node.js server & express.js API
 
 - Created a server to listen for requests on port 5000.
 - Created sample data.
 - Created API to handle GET requests.
   - Fetch all notes & Fetch note based on id.
 - Used thunder-client to make ajax calls.
+
+### [02] Created react.ts app
+
+- Created a react.ts app using vite.
+- Added tailwind css & react-icons for styling.
