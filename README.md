@@ -74,3 +74,9 @@ List of contributors:
 
 - Created a react.ts app using vite.
 - Added tailwind css & react-icons for styling.
+
+### [03] Created pages, added custom fonts & extended tailwind styles
+
+- Created Login.tsx and Notes.tsx
+- Added fonts: open-sans, shantel-sans, Added custom colors.
+- 

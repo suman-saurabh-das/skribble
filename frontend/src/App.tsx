@@ -1,9 +1,16 @@
+import { useState } from "react";
+
+// components
+import Notes from "./pages/Notes";
+
 function App() {
+  const [darkMode, setDarkMode] = useState<boolean>(false);
+
   return (
-    <>
-      <h1 className="mt-8 text-3xl text-center">Skribble</h1>
-    </>
-  )
+    <div className={`${darkMode ? "dark" : ""} font-open-sans text-sm`}>
+      <Notes darkMode={darkMode} setDarkMode={setDarkMode} />
+    </div>
+  );
 }
 
-export default App
+export default App;
