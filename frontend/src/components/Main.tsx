@@ -11,7 +11,7 @@ import ScribbleEdit from "./ScribbleEdit";
 import ScribbleCreate from "./ScribbleCreate";
 import ScribblePreview from "./ScribblePreview";
 
-// type
+// types
 import type { Dispatch, SetStateAction } from "react";
 
 const Main = ({
@@ -25,20 +25,20 @@ const Main = ({
   setShowSidebar: Dispatch<SetStateAction<boolean>>;
   setDarkMode: Dispatch<SetStateAction<boolean>>;
 }) => {
-  const [currentView, setCurrentView] = useState<string>("create");
+  const [currentView, setCurrentView] = useState<string>("preview");
 
   return (
-    <div className="bg-light-secondary dark:bg-dark-secondary p-4 min-h-screen overflow-y-auto w-full">
+    <div className="bg-lightSurface dark:bg-darkSurface p-4 min-h-screen overflow-y-auto w-full">
       {/* Navbar */}
       <div className="flex items-center justify-between">
-        {/* Left menu */}
+        {/* Left nav-menu */}
         <div className="flex items-center gap-2">
-          {/* Icon when sidebar is close */}
+          {/* AppLogo - show when sidebar is closed */}
           {!showSidebar && <GiFeather className="text-4xl" />}
 
-          {/* Side menu button */}
+          {/* Sidebar toggle button */}
           <button
-            className="bg-light-primary dark:bg-dark-primary p-2 rounded-md"
+            className="bg-lightBg hover:bg-lightHover dark:bg-darkBg hover:dark:bg-darkHighlight dark:hover:bg-lightHover p-2 rounded-md"
             onClick={() => setShowSidebar(!showSidebar)}
           >
             <LuPanelLeftOpen
@@ -48,19 +48,27 @@ const Main = ({
             />
           </button>
 
-          {/* Preview Scribble button */}
+          {/* Preview scribble button */}
           <div
             onClick={() => setCurrentView("preview")}
-            className="bg-light-primary dark:bg-dark-primary cursor-pointer flex items-center gap-2 p-2 rounded-md w-fit"
+            className={`${
+              currentView === "preview"
+                ? "bg-lightHover dark:bg-darkHighlight"
+                : "bg-lightBg dark:bg-darkBg"
+            } hover:bg-lightHover dark:hover:bg-darkHighlight cursor-pointer duration-100 flex items-center gap-2 p-2 rounded-md w-fit`}
           >
             <VscPreview className="text-xl" />
             <span className="hidden md:block">Preview scribble</span>
           </div>
 
-          {/* Edit Scribble button */}
+          {/* Edit scribble button */}
           <div
             onClick={() => setCurrentView("edit")}
-            className="bg-light-primary dark:bg-dark-primary cursor-pointer flex items-center gap-2 p-2 rounded-md w-fit"
+            className={`${
+              currentView === "edit"
+                ? "bg-lightHover dark:bg-darkHighlight"
+                : "bg-lightBg dark:bg-darkBg"
+            } hover:bg-lightHover dark:hover:bg-darkHighlight cursor-pointer duration-100 flex items-center gap-2 p-2 rounded-md w-fit`}
           >
             <FaRegEdit className="text-xl" />
             <span className="hidden md:block">Edit scribble</span>
@@ -69,29 +77,37 @@ const Main = ({
           {/* Create new scribble button */}
           <div
             onClick={() => setCurrentView("create")}
-            className="bg-light-primary dark:bg-dark-primary cursor-pointer flex items-center gap-2 p-2 rounded-md w-fit"
+            className={`${
+              currentView === "create"
+                ? "bg-lightHover dark:bg-darkHighlight"
+                : "bg-lightBg dark:bg-darkBg"
+            } hover:bg-lightHover dark:hover:bg-darkHighlight cursor-pointer duration-100 flex items-center gap-2 p-2 rounded-md w-fit`}
           >
             <IoMdAddCircleOutline className="text-xl" />
             <span className="hidden md:block">New scribble</span>
           </div>
         </div>
 
-        {/* Right menu */}
+        {/* Right nav-menu */}
         <div className="flex gap-2 sm:gap-4 items-center">
-          <span className="bg-light-primary dark:bg-dark-primary p-1 rounded-full">
+          {/* Dark/light mode button */}
+          <span className="bg-lightBg dark:bg-darkBg p-1 rounded-full">
             <TbBulb
-              className={`${darkMode ? "hover:text-yellow-400" : "hover:text-neutral-600"} cursor-pointer text-2xl`}
+              className={`${
+                darkMode ? "hover:text-yellow-400" : "hover:text-neutral-600"
+              } cursor-pointer text-2xl`}
               onClick={() => setDarkMode(!darkMode)}
             />
           </span>
-          <span className="bg-light-primary dark:bg-dark-primary p-1 rounded-full">
+          {/* User profile button */}
+          <span className="bg-lightBg dark:bg-darkBg p-1 rounded-full">
             <FaUserCircle className="cursor-pointer text-2xl" />
           </span>
         </div>
       </div>
 
-      {/* Content */}
-      <div className="bg-light-tertiary dark:bg-dark-tertiary mt-4 p-4 rounded-md h-[calc(100vh-90px)] overflow-y-auto">
+      {/* Main Content */}
+      <div className="bg-lightHighlight dark:bg-darkHighlight mt-4 p-4 rounded-md h-[calc(100vh-90px)] overflow-y-auto">
         {currentView === "preview" && <ScribblePreview />}
         {currentView === "edit" && <ScribbleEdit />}
         {currentView === "create" && <ScribbleCreate />}

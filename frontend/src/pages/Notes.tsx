@@ -1,11 +1,11 @@
 import { useState } from "react";
 
-// types
-import type { Dispatch, SetStateAction } from "react";
-
 // components
 import Sidebar from "../components/Sidebar";
 import Main from "../components/Main";
+
+// types
+import type { Dispatch, SetStateAction } from "react";
 
 const Notes = ({
   darkMode,

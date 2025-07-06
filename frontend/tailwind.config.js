@@ -12,12 +12,15 @@ export default {
         "shantel-sans": ["Shantell Sans", "cursive"]
       },
       colors: {
-        "dark-primary": "#0D1117",
-        "dark-secondary": "#161B22",
-        "dark-tertiary": "#21262D",
-        "light-primary": "#C6CDD5",
-        "light-secondary": "#DEE3E9",
-        "light-tertiary": "#ECF2F8",
+        "darkBg": "#0D1117",
+        "darkSurface": "#161B22",
+        "darkHighlight": "#21262D",
+        "lightHover": "#B9BBBE",
+        "lightBg": "#C8C9CB",
+        "lightSurface": "#DCDCDC",
+        "lightHighlight": "#F0F0F0",
+        "bluePrimary": "#0077B5",
+        "blueSecondary": "#0083CA",
       }
     },
   },

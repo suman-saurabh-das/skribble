@@ -5,14 +5,14 @@ import type { noteDataType } from "../utils/types";
 
 const SidebarCard = ({ note }: noteDataType) => {
   return (
-    <div className="hover:bg-light-tertiary hover:dark:bg-dark-tertiary hover:cursor-pointer flex items-center justify-between px-3 py-2 rounded-md">
-      {/* Scribble title */}
+    <div className="hover:bg-lightHighlight hover:dark:bg-darkHighlight hover:cursor-pointer flex items-center justify-between px-3 py-2 rounded-md">
+      {/* SidebarCard title */}
       <div className="w-[80%]">
         <h5 className="truncate">{note.title}</h5>
       </div>
-      {/* Buttons */}
+      {/* SidebarCard buttons */}
       <div className="flex justify-end items-center gap-2 text-lg w-[15%]">
-        <button className="hover:text-blue-500">
+        <button className="hover:text-bluePrimary">
           <MdOutlineEdit />
         </button>
         <button className="hover:text-red-500">

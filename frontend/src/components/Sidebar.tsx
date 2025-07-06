@@ -3,9 +3,9 @@ import { GiFeather } from "react-icons/gi";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 
 // components
-import ScribbleCard from "./SidebarCard";
+import SidebarCard from "./SidebarCard";
 
-// type
+// types
 import type { Dispatch, SetStateAction } from "react";
 
 // sample data
@@ -22,15 +22,18 @@ const Sidebar = ({
     <div
       className={`${
         showSidebar ? "translate-x-0" : "-translate-x-80"
-      } absolute top-0 left-0 bg-light-primary dark:bg-dark-primary transform transition-transform flex flex-col gap-4 min-h-screen overflow-y-auto w-80 duration-300 z-50`}
+      } absolute top-0 left-0 bg-lightBg dark:bg-darkBg transform transition-transform flex flex-col gap-4 min-h-screen overflow-y-auto w-80 duration-300 z-50`}
     >
       <div className="p-4">
         {/* App header */}
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
+            {/* App logo */}
             <h3 className="font-shantel-sans text-4xl">Skribble</h3>
             <GiFeather className="text-4xl" />
           </div>
+
+          {/* Close sidebar button (Only for small devices) */}
           <span
             className="xl:hidden"
             onClick={() => {
@@ -45,10 +48,10 @@ const Sidebar = ({
         <div
           className={`${
             notesData.notes.length > 0 && "gap-4 pb-4"
-          } bg-light-secondary dark:bg-dark-secondary flex flex-col rounded-md`}
+          } bg-lightSurface dark:bg-darkSurface flex flex-col rounded-md`}
         >
           {/* Searchbar */}
-          <div className="flex bg-light-tertiary dark:bg-dark-tertiary rounded-md w-full">
+          <div className="flex bg-lightHighlight dark:bg-darkHighlight rounded-md w-full">
             <input
               className="bg-transparent outline-none py-3 px-4 placeholder:text-neutral-900 dark:placeholder:text-neutral-400 w-[85%]"
               placeholder="Search"
@@ -59,10 +62,10 @@ const Sidebar = ({
             </div>
           </div>
 
-          {/* Scribble cards */}
+          {/* Sidebar cards */}
           <div className="flex flex-col gap-2 px-2 h-[calc(100vh-168px)] overflow-y-auto">
             {notesData.notes.map((note) => (
-              <ScribbleCard key={note._id} note={note} />
+              <SidebarCard key={note._id} note={note} />
             ))}
           </div>
         </div>
