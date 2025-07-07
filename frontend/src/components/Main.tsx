@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Link, Outlet, useParams } from "react-router-dom";
 import { FaRegEdit, FaUserCircle } from "react-icons/fa";
 import { GiFeather } from "react-icons/gi";
 import { IoMdAddCircleOutline } from "react-icons/io";
@@ -6,13 +6,9 @@ import { LuPanelLeftOpen } from "react-icons/lu";
 import { TbBulb } from "react-icons/tb";
 import { VscPreview } from "react-icons/vsc";
 
-// components
-import ScribbleEdit from "./ScribbleEdit";
-import ScribbleCreate from "./ScribbleCreate";
-import ScribblePreview from "./ScribblePreview";
-
 // types
-import type { Dispatch, SetStateAction } from "react";
+import { useState, useEffect } from "react";
+import { type Dispatch, type SetStateAction } from "react";
 
 const Main = ({
   showSidebar,
@@ -25,7 +21,14 @@ const Main = ({
   setShowSidebar: Dispatch<SetStateAction<boolean>>;
   setDarkMode: Dispatch<SetStateAction<boolean>>;
 }) => {
-  const [currentView, setCurrentView] = useState<string>("preview");
+  const params = useParams();
+  const [scribbleId, setScribbleId] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    if (params) {
+      setScribbleId(params.id);
+    }
+  }, [params.id]);
 
   return (
     <div className="bg-lightSurface dark:bg-darkSurface p-4 min-h-screen overflow-y-auto w-full">
@@ -48,44 +51,48 @@ const Main = ({
             />
           </button>
 
-          {/* Preview scribble button */}
-          <div
-            onClick={() => setCurrentView("preview")}
-            className={`${
-              currentView === "preview"
-                ? "bg-lightHover dark:bg-darkHighlight"
-                : "bg-lightBg dark:bg-darkBg"
-            } hover:bg-lightHover dark:hover:bg-darkHighlight cursor-pointer duration-100 flex items-center gap-2 p-2 rounded-md w-fit`}
-          >
-            <VscPreview className="text-xl" />
-            <span className="hidden md:block">Preview scribble</span>
-          </div>
-
-          {/* Edit scribble button */}
-          <div
-            onClick={() => setCurrentView("edit")}
-            className={`${
-              currentView === "edit"
-                ? "bg-lightHover dark:bg-darkHighlight"
-                : "bg-lightBg dark:bg-darkBg"
-            } hover:bg-lightHover dark:hover:bg-darkHighlight cursor-pointer duration-100 flex items-center gap-2 p-2 rounded-md w-fit`}
-          >
-            <FaRegEdit className="text-xl" />
-            <span className="hidden md:block">Edit scribble</span>
-          </div>
-
           {/* Create new scribble button */}
-          <div
-            onClick={() => setCurrentView("create")}
+          <Link
+            to={"/skribble/create"}
             className={`${
-              currentView === "create"
+              "create" === "create"
                 ? "bg-lightHover dark:bg-darkHighlight"
                 : "bg-lightBg dark:bg-darkBg"
             } hover:bg-lightHover dark:hover:bg-darkHighlight cursor-pointer duration-100 flex items-center gap-2 p-2 rounded-md w-fit`}
           >
             <IoMdAddCircleOutline className="text-xl" />
             <span className="hidden md:block">New scribble</span>
-          </div>
+          </Link>
+
+          {/* Preview scribble button */}
+          {scribbleId && (
+            <Link
+              to={`/skribble/preview/${scribbleId}`}
+              className={`${
+                "preview" === "preview"
+                  ? "bg-lightHover dark:bg-darkHighlight"
+                  : "bg-lightBg dark:bg-darkBg"
+              } hover:bg-lightHover dark:hover:bg-darkHighlight cursor-pointer duration-100 flex items-center gap-2 p-2 rounded-md w-fit`}
+            >
+              <VscPreview className="text-xl" />
+              <span className="hidden md:block">Preview scribble</span>
+            </Link>
+          )}
+
+          {/* Edit scribble button */}
+          {scribbleId && (
+            <Link
+              to={`/skribble/edit/${scribbleId}`}
+              className={`${
+                "edit" === "edit"
+                  ? "bg-lightHover dark:bg-darkHighlight"
+                  : "bg-lightBg dark:bg-darkBg"
+              } hover:bg-lightHover dark:hover:bg-darkHighlight cursor-pointer duration-100 flex items-center gap-2 p-2 rounded-md w-fit`}
+            >
+              <FaRegEdit className="text-xl" />
+              <span className="hidden md:block">Edit scribble</span>
+            </Link>
+          )}
         </div>
 
         {/* Right nav-menu */}
@@ -108,9 +115,7 @@ const Main = ({
 
       {/* Main Content */}
       <div className="bg-lightHighlight dark:bg-darkHighlight mt-4 p-4 rounded-md h-[calc(100vh-90px)] overflow-y-auto">
-        {currentView === "preview" && <ScribblePreview />}
-        {currentView === "edit" && <ScribbleEdit />}
-        {currentView === "create" && <ScribbleCreate />}
+        <Outlet />
       </div>
     </div>
   );
