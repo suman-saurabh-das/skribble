@@ -1,8 +1,8 @@
 {
     "clientName": "Thunder Client",
-    "collectionName": "note-vault",
+    "collectionName": "skribbles",
     "collectionId": "5815493e-1062-4376-a7e7-7d4e790f84f3",
-    "dateExported": "2025-06-30T10:32:14.410Z",
+    "dateExported": "2025-07-11T14:57:33.931Z",
     "version": "1.2",
     "folders": [],
     "requests": [
@@ -11,11 +11,11 @@
             "colId": "5815493e-1062-4376-a7e7-7d4e790f84f3",
             "containerId": "",
             "name": "/api/notes",
-            "url": "http://localhost:5000/api/notes",
+            "url": "http://localhost:5000/api/scribbles",
             "method": "GET",
             "sortNum": 10000,
             "created": "2025-06-30T10:31:34.772Z",
-            "modified": "2025-06-30T10:31:49.245Z",
+            "modified": "2025-07-11T14:57:22.045Z",
             "headers": []
         },
         {
@@ -23,13 +23,13 @@
             "colId": "5815493e-1062-4376-a7e7-7d4e790f84f3",
             "containerId": "",
             "name": "api/nodes/id",
-            "url": "http://localhost:5000/api/notes/1",
+            "url": "http://localhost:5000/api/scribbles/1",
             "method": "GET",
             "sortNum": 20000,
             "created": "2025-06-30T10:32:02.732Z",
-            "modified": "2025-06-30T10:32:07.686Z",
+            "modified": "2025-07-11T14:57:26.763Z",
             "headers": []
         }
     ],
-    "ref": "NF2uI-84e57HB1IRTscJ1mz3ph9UP2c6h4iwX0tHox6M2SPItv6QCsKLUex7MEz1vijCpALAQmi0ixGCQolbLQ"
+    "ref": "NF2uI-84e57HB1IRTscJ1lwfNVkMb5PPNwpxLb-AwHYsxgxE9IEr827ZhkoyIl1kOBTzhyRpF2LRP7_n6Fyjow"
 }

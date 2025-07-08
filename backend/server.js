@@ -2,7 +2,7 @@
 require("dotenv").config();
 
 const express = require("express"); // Import express module, a web framework for node.js
-const notesData = require("./data/notes"); // Import sample notes data
+const scribblesData = require("./data/scribbles"); // Import sample scribbles
 
 const app = express(); // Create an Express application instance
 const PORT = process.env.PORT || 5000; // Define port from .env file (defaults to 5000)
@@ -12,17 +12,17 @@ app.listen(PORT, console.log(`Server started on PORT ${PORT}`));
 
 // GET route for root path
 app.get("/", (req, res) => {
-  res.send("App is running !");
+  res.send("Server is running !");
 });
 
-// GET route that returns all notes data as JSON
-app.get("/api/notes", (req, res) => {
-  res.json(notesData);
+// GET route that returns all scribbles data as JSON
+app.get("/api/scribbles", (req, res) => {
+  res.json(scribblesData);
 });
 
-// GET route to return a single note based on its _id
-app.get("/api/notes/:id", (req, res) => {
-  const note = notesData.find((note) => note._id === req.params.id);
+// GET route to return a single scribble based on its _id
+app.get("/api/scribbles/:id", (req, res) => {
+  const note = scribblesData.find((note) => note._id === req.params.id);
   if (!note) {
     return res.status(404).send({ message: "Note not found" });
   }
