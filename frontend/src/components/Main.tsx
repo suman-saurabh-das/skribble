@@ -8,21 +8,16 @@ import { VscPreview } from "react-icons/vsc";
 
 // types
 import { useState, useEffect } from "react";
-import { type Dispatch, type SetStateAction } from "react";
+import type { MainProps } from "../utils/types";
 
 const Main = ({
-  showSidebar,
   darkMode,
-  setShowSidebar,
   setDarkMode,
-}: {
-  showSidebar: boolean;
-  darkMode: boolean;
-  setShowSidebar: Dispatch<SetStateAction<boolean>>;
-  setDarkMode: Dispatch<SetStateAction<boolean>>;
-}) => {
+  showSidebar,
+  setShowSidebar,
+}: MainProps) => {
   const params = useParams();
-  const [scribbleId, setScribbleId] = useState<string | undefined>(undefined);
+  const [scribbleId, setScribbleId] = useState<string | undefined>("1");
 
   useEffect(() => {
     if (params) {
@@ -37,7 +32,11 @@ const Main = ({
         {/* Left nav-menu */}
         <div className="flex items-center gap-2">
           {/* AppLogo - show when sidebar is closed */}
-          {!showSidebar && <GiFeather className="text-4xl" />}
+          {!showSidebar && (
+            <Link to={"/skribble"} onClick={() => setShowSidebar(true)}>
+              <GiFeather className="text-4xl" />
+            </Link>
+          )}
 
           {/* Sidebar toggle button */}
           <button

@@ -1,36 +1,39 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useScribbles } from "../context/ScribbleContext";
 
 // types
-import type { noteDataType } from "../utils/types";
-
-// sample data
-import notesData from "../../data/notes.json";
+import type { scribbleDataType } from "../utils/types";
 
 const ScribblePreview = () => {
-  const [selectedNote, setSelectedNote] = useState<noteDataType | undefined>(
-    undefined
-  );
+  const { scribbles } = useScribbles();
   const params = useParams();
+  const [selectedScribble, setSelectedScribble] = useState<scribbleDataType | undefined>(undefined);
 
   useEffect(() => {
-    const currentNote = notesData.notes.find((note) => note._id === params.id);
-    setSelectedNote(currentNote);
-  }, [params.id]);
+    const currentScribble = scribbles.find((scribble) => scribble._id === params.id);
+    if (currentScribble) {
+      setSelectedScribble(currentScribble);
+    } else {
+      setSelectedScribble(undefined)
+    }
+  }, [scribbles, params.id]);
 
-  if (!selectedNote) {
+  if (!selectedScribble) {
     return (
       <div>
         <p>Please select a scribble !</p>
       </div>
-    )
+    );
   }
 
   return (
     <div className="flex flex-col gap-4">
-      <h1 className="text-2xl">{selectedNote.title}</h1>
-      <span className="bg-bluePrimary px-4 py-1 rounded-md text-white w-fit">{selectedNote.category}</span>
-      <p className="">{selectedNote.content}</p>
+      <h1 className="text-2xl">{selectedScribble.title}</h1>
+      <span className="bg-bluePrimary px-4 py-1 rounded-md text-white w-fit">
+        {selectedScribble.category}
+      </span>
+      <p className="">{selectedScribble.content}</p>
     </div>
   );
 };

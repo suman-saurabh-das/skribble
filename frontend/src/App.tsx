@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-// components
+// pages
 import Login from "./pages/Login";
-import Notes from "./pages/Notes";
-import ScribbleSelect from "./components/ScribbleSelect";
+import Scribbles from "./pages/Scribbles";
+
+// components
 import ScribbleCreate from "./components/ScribbleCreate";
 import ScribblePreview from "./components/ScribblePreview";
 import ScribbleEdit from "./components/ScribbleEdit";
@@ -18,10 +19,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />
           <Route
-            path="/skribble"
-            element={<Notes darkMode={darkMode} setDarkMode={setDarkMode} />}
+            path="skribble"
+            element={<Scribbles darkMode={darkMode} setDarkMode={setDarkMode} />}
           >
-            <Route index element={<ScribbleSelect />} />
+            <Route index element={<ScribblePreview />} />
             <Route path="create" element={<ScribbleCreate />} />
             <Route path="preview/:id" element={<ScribblePreview />} />
             <Route path="edit/:id" element={<ScribbleEdit />} />

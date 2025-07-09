@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import { useScribbles } from "../context/ScribbleContext";
 import { FiSearch } from "react-icons/fi";
 import { GiFeather } from "react-icons/gi";
 import { IoIosCloseCircleOutline } from "react-icons/io";
@@ -6,18 +8,11 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import SidebarCard from "./SidebarCard";
 
 // types
-import type { Dispatch, SetStateAction } from "react";
+import type { SidebarProps } from "../utils/types";
 
-// sample data
-import notesData from "../../data/notes.json";
+const Sidebar = ({ showSidebar, setShowSidebar }: SidebarProps) => {
+  const { scribbles } = useScribbles();
 
-const Sidebar = ({
-  showSidebar,
-  setShowSidebar,
-}: {
-  showSidebar: boolean;
-  setShowSidebar: Dispatch<SetStateAction<boolean>>;
-}) => {
   return (
     <div
       className={`${
@@ -27,11 +22,11 @@ const Sidebar = ({
       <div className="p-4">
         {/* App header */}
         <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-2">
+          <Link to={"/skribble"} className="flex items-center gap-2">
             {/* App logo */}
             <h3 className="font-shantel-sans text-4xl">Skribble</h3>
             <GiFeather className="text-4xl" />
-          </div>
+          </Link>
 
           {/* Close sidebar button (Only for small devices) */}
           <span
@@ -47,7 +42,7 @@ const Sidebar = ({
         {/* Side menu */}
         <div
           className={`${
-            notesData.notes.length > 0 && "gap-4 pb-4"
+            scribbles.length > 0 && "gap-4 pb-4"
           } bg-lightSurface dark:bg-darkSurface flex flex-col rounded-md`}
         >
           {/* Searchbar */}
@@ -64,8 +59,8 @@ const Sidebar = ({
 
           {/* Sidebar cards */}
           <div className="flex flex-col gap-2 px-2 h-[calc(100vh-168px)] overflow-y-auto">
-            {notesData.notes.map((note) => (
-              <SidebarCard key={note._id} note={note} />
+            {scribbles.map((scribble) => (
+              <SidebarCard key={scribble._id} scribble={scribble} />
             ))}
           </div>
         </div>
