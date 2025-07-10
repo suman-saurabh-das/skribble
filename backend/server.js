@@ -3,8 +3,11 @@ require("dotenv").config();
 
 const express = require("express"); // Import express module, a web framework for node.js
 const scribblesData = require("./data/scribbles"); // Import sample scribbles
+const connectDB = require("./config/db");
 
 const app = express(); // Create an Express application instance
+connectDB(); // Connect to mongoDB
+
 const PORT = process.env.PORT || 5000; // Define port from .env file (defaults to 5000)
 
 // Start server and log a message once it's running
