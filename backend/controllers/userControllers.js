@@ -1,25 +1,29 @@
 const asyncHandler = require("express-async-handler"); // Used for handling errors
 const User = require("../models/userModel");
+const generateToken = require("../utils/generateToken");
 
 const registerUser = asyncHandler(async (req, res) => {
   // Taking inputs from user
   const { name, email, password, pic } = req.body;
 
-  // Check if user is already there in DB
+  // Find user in DB using email & check if user exists
   const userExists = await User.findOne({ email });
   if (userExists) {
     res.status(400);
     throw new Error("User already exists with the email !");
   }
 
+  // Create a new user
   const user = await User.create({ name, email, password, pic });
+
   if (user) {
     res.status(201).json({
-      _id: user.id,
+      _id: user._id,
       pic: user.pic,
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
+      token: generateToken(user._id),
     });
   } else {
     res.status(400);
@@ -28,8 +32,13 @@ const registerUser = asyncHandler(async (req, res) => {
 });
 
 const authUser = asyncHandler(async (req, res) => {
+  // Taking inputs from user
   const { email, password } = req.body;
+
+  // Find user in DB using email
   const user = await User.findOne({ email });
+
+  // Check if password entered by user is correct
   if (user && (await user.matchPassword(password))) {
     res.json({
       _id: user._id,
@@ -37,6 +46,7 @@ const authUser = asyncHandler(async (req, res) => {
       email: user.email,
       isAdmin: user.isAdmin,
       pic: user.pic,
+      token: generateToken(user._id),
     });
   } else {
     res.status(401);
