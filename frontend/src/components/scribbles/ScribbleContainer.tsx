@@ -8,14 +8,14 @@ import { VscPreview } from "react-icons/vsc";
 
 // types
 import { useState, useEffect } from "react";
-import type { MainProps } from "../utils/types";
+import type { ScribbleContainerProps } from "../../utils/types";
 
-const Main = ({
+const ScribbleContainer = ({
   darkMode,
   setDarkMode,
   showSidebar,
   setShowSidebar,
-}: MainProps) => {
+}: ScribbleContainerProps) => {
   const params = useParams();
   const [scribbleId, setScribbleId] = useState<string | undefined>("1");
 
@@ -112,7 +112,7 @@ const Main = ({
         </div>
       </div>
 
-      {/* Main Content */}
+      {/* ScribbleContainer Content */}
       <div className="bg-lightHighlight dark:bg-darkHighlight mt-4 p-4 rounded-md h-[calc(100vh-90px)] overflow-y-auto">
         <Outlet />
       </div>
@@ -120,4 +120,4 @@ const Main = ({
   );
 };
 
-export default Main;
+export default ScribbleContainer;

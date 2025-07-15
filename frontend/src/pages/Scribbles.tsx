@@ -2,8 +2,8 @@ import { useState } from "react";
 
 // components
 import { ScribbleProvider } from "../context/ScribbleContext";
-import Sidebar from "../components/Sidebar";
-import Main from "../components/Main";
+import Sidebar from "../components/sidebar/Sidebar";
+import ScribbleContainer from "../components/scribbles/ScribbleContainer";
 
 // types
 import type { ScribblesProps } from "../utils/types";
@@ -23,7 +23,7 @@ const Scribbles = ({ darkMode, setDarkMode }: ScribblesProps) => {
             showSidebar ? "xl:ml-80" : "xl:ml-0"
           } w-full`}
         >
-          <Main
+          <ScribbleContainer
             darkMode={darkMode}
             setDarkMode={setDarkMode}
             showSidebar={showSidebar}

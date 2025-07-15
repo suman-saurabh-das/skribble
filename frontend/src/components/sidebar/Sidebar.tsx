@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useScribbles } from "../context/ScribbleContext";
+import { useScribbles } from "../../context/ScribbleContext";
 import { FiSearch } from "react-icons/fi";
 import { GiFeather } from "react-icons/gi";
 import { IoIosCloseCircleOutline } from "react-icons/io";
@@ -8,7 +8,7 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import SidebarCard from "./SidebarCard";
 
 // types
-import type { SidebarProps } from "../utils/types";
+import type { SidebarProps } from "../../utils/types";
 
 const Sidebar = ({ showSidebar, setShowSidebar }: SidebarProps) => {
   const { scribbles } = useScribbles();
@@ -43,7 +43,7 @@ const Sidebar = ({ showSidebar, setShowSidebar }: SidebarProps) => {
         <div
           className={`${
             scribbles.length > 0 && "gap-4 pb-4"
-          } bg-lightSurface dark:bg-darkSurface flex flex-col rounded-md`}
+          } bg-lightSurface dark:bg-darkSurface flex flex-col h-[calc(100vh-92px)] rounded-md`}
         >
           {/* Searchbar */}
           <div className="flex bg-lightHighlight dark:bg-darkHighlight rounded-md w-full">
@@ -58,7 +58,7 @@ const Sidebar = ({ showSidebar, setShowSidebar }: SidebarProps) => {
           </div>
 
           {/* Sidebar cards */}
-          <div className="flex flex-col gap-2 px-2 h-[calc(100vh-168px)] overflow-y-auto">
+          <div className="flex flex-col gap-2 px-2 overflow-y-auto">
             {scribbles.map((scribble) => (
               <SidebarCard key={scribble._id} scribble={scribble} />
             ))}

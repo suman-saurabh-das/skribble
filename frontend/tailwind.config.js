@@ -19,8 +19,8 @@ export default {
         "lightBg": "#C8C9CB",
         "lightSurface": "#DCDCDC",
         "lightHighlight": "#F0F0F0",
-        "bluePrimary": "#0077B5",
-        "blueSecondary": "#0083CA",
+        "bluePrimary": "#0083CA",
+        "blueSecondary": "#0077B5",
       }
     },
   },

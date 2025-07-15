@@ -7,17 +7,30 @@ export type scribbleDataType = {
   category: string;
 };
 
+export type loginFormData = {
+  email: string;
+  password: string;
+}
+
+export type registerFormData = {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  profilePic: string;
+};
+
 export type ScribbleContextType = {
   scribbles: scribbleDataType[];
   setScribbles: Dispatch<React.SetStateAction<scribbleDataType[]>>;
-}
+};
 
 export type ScribblesProps = {
   darkMode: boolean;
   setDarkMode: Dispatch<SetStateAction<boolean>>;
-}
+};
 
-export type MainProps = {
+export type ScribbleContainerProps = {
   showSidebar: boolean;
   darkMode: boolean;
   setShowSidebar: Dispatch<SetStateAction<boolean>>;

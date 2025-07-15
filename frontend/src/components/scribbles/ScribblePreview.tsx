@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useScribbles } from "../context/ScribbleContext";
+import { useScribbles } from "../../context/ScribbleContext";
 
 // types
-import type { scribbleDataType } from "../utils/types";
+import type { scribbleDataType } from "../../utils/types";
 
 const ScribblePreview = () => {
   const { scribbles } = useScribbles();

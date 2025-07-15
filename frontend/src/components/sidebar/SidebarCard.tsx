@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { MdDeleteForever, MdOutlineEdit } from "react-icons/md";
 
 // types
-import type { SidebarCardProps } from "../utils/types";
+import type { SidebarCardProps } from "../../utils/types";
 
 const SidebarCard = ({ scribble }: SidebarCardProps) => {
   return (

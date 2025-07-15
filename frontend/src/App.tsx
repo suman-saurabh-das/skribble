@@ -2,22 +2,22 @@ import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // pages
-import Login from "./pages/Login";
+import Auth from "./pages/Auth";
 import Scribbles from "./pages/Scribbles";
 
 // components
-import ScribbleCreate from "./components/ScribbleCreate";
-import ScribblePreview from "./components/ScribblePreview";
-import ScribbleEdit from "./components/ScribbleEdit";
+import ScribbleCreate from "./components/scribbles/ScribbleCreate";
+import ScribblePreview from "./components/scribbles/ScribblePreview";
+import ScribbleEdit from "./components/scribbles/ScribbleEdit";
 
 function App() {
   const [darkMode, setDarkMode] = useState<boolean>(false);
 
   return (
     <BrowserRouter>
-      <div className={`${darkMode ? "dark" : ""} font-open-sans text-sm`}>
+      <div className={`${darkMode ? "dark" : ""} font-open-sans mx-auto text-sm max-w-screen-2xl`}>
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<Auth />} />
           <Route
             path="skribble"
             element={<Scribbles darkMode={darkMode} setDarkMode={setDarkMode} />}
