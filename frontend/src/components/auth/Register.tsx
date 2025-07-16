@@ -1,5 +1,8 @@
+import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { FiInfo } from "react-icons/fi";
+import { ImSpinner10 } from "react-icons/im";
 
 // types
 import type { registerFormData } from "../../utils/types";
@@ -13,7 +16,10 @@ const Register = () => {
     profilePic: "",
   };
 
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState<registerFormData>(initialData);
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,6 +36,7 @@ const Register = () => {
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
   const imagePattern = /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp|svg))$/i;
 
+  // Validate form data
   const validateFormData = (formData: registerFormData) => {
     if (!formData.name) {
       setError("Name is required!");
@@ -57,16 +64,34 @@ const Register = () => {
     return true;
   };
 
-  const handleRegisterSubmit = (e: React.FormEvent) => {
+  const handleRegisterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validateFormData(formData)) {
-      console.log("FORM DATA :", formData);
+      try {
+        setLoading(true);
+        const config = {
+          headers: {
+            "Content-type": "application/json",
+          },
+        };
+        const res = await axios.post("/api/users/", formData, config);
+        // Save user info to local storage
+        localStorage.setItem("userInfo", JSON.stringify(res.data));
+        setLoading(false);
+        // Navigate to skribble home page
+        navigate("/skribble");
+      } catch (error) {
+        if (axios.isAxiosError(error)) {
+          setError(error?.response?.data?.message || "Request failed!");
+        }
+        setLoading(false);
+      }
     }
   };
 
   return (
     <form
-      className="font-medium flex flex-col gap-4 p-4 text-[13px]"
+      className="font-medium flex flex-col gap-4 p-8 sm:p-4 text-[13px]"
       onSubmit={(e) => handleRegisterSubmit(e)}
     >
       <div className="flex flex-col gap-1">
@@ -78,6 +103,7 @@ const Register = () => {
           type="text"
           value={formData.name}
           onChange={handleChange}
+          onFocus={() => setError("")}
         />
       </div>
       <div className="flex flex-col gap-1">
@@ -89,6 +115,7 @@ const Register = () => {
           type="text"
           value={formData.email}
           onChange={handleChange}
+          onFocus={() => setError("")}
         />
       </div>
       <div className="flex flex-col gap-1">
@@ -97,9 +124,10 @@ const Register = () => {
           className="bg-white border border-neutral-300 outline-none px-4 py-2 rounded-full"
           id="password"
           name="password"
-          type="text"
+          type="password"
           value={formData.password}
           onChange={handleChange}
+          onFocus={() => setError("")}
         />
       </div>
       <div className="flex flex-col gap-1">
@@ -108,9 +136,10 @@ const Register = () => {
           className="bg-white border border-neutral-300 outline-none px-4 py-2 rounded-full"
           id="confirmPassword"
           name="confirmPassword"
-          type="text"
+          type="password"
           value={formData.confirmPassword}
           onChange={handleChange}
+          onFocus={() => setError("")}
         />
       </div>
       <div className="flex flex-col gap-1">
@@ -122,6 +151,7 @@ const Register = () => {
           type="text"
           value={formData.profilePic}
           onChange={handleChange}
+          onFocus={() => setError("")}
         />
       </div>
       {error && (
@@ -130,10 +160,11 @@ const Register = () => {
         </p>
       )}
       <button
-        className="bg-bluePrimary hover:bg-blueSecondary font-semibold mt-2 p-3 rounded-full text-white w-32"
+        className="bg-bluePrimary hover:bg-blueSecondary font-semibold flex items-center justify-center mt-2 p-3 rounded-full text-white w-32"
         type="submit"
+        disabled={loading}
       >
-        Register
+        {loading ? <ImSpinner10 className="animate-spin text-lg"/> : "Register"}
       </button>
     </form>
   );

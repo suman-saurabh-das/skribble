@@ -1,4 +1,5 @@
-import { Link, Outlet, useParams } from "react-router-dom";
+import { useRef } from "react";
+import { Link, Outlet, useParams, useNavigate } from "react-router-dom";
 import { FaRegEdit, FaUserCircle } from "react-icons/fa";
 import { GiFeather } from "react-icons/gi";
 import { IoMdAddCircleOutline } from "react-icons/io";
@@ -17,7 +18,41 @@ const ScribbleContainer = ({
   setShowSidebar,
 }: ScribbleContainerProps) => {
   const params = useParams();
-  const [scribbleId, setScribbleId] = useState<string | undefined>("1");
+  const navigate = useNavigate();
+
+  const [scribbleId, setScribbleId] = useState<string | undefined>(undefined);
+  const [showDropdown, setShowDropDown] = useState(false);
+
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  const profileButtonRef = useRef<HTMLSpanElement>(null);
+
+  // Hide dropdown when clicked anywhere in the app.
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target as Node) &&
+        profileButtonRef.current &&
+        !profileButtonRef.current.contains(e.target as Node)
+      ) {
+        setShowDropDown(false);
+      }
+    };
+
+    if (showDropdown) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showDropdown]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("userInfo");
+    setShowDropDown(false);
+    navigate("/");
+  };
 
   useEffect(() => {
     if (params) {
@@ -95,7 +130,7 @@ const ScribbleContainer = ({
         </div>
 
         {/* Right nav-menu */}
-        <div className="flex gap-2 sm:gap-4 items-center">
+        <div className="flex gap-2 sm:gap-4 items-center relative">
           {/* Dark/light mode button */}
           <span className="bg-lightBg dark:bg-darkBg p-1 rounded-full">
             <TbBulb
@@ -105,10 +140,26 @@ const ScribbleContainer = ({
               onClick={() => setDarkMode(!darkMode)}
             />
           </span>
+
           {/* User profile button */}
-          <span className="bg-lightBg dark:bg-darkBg p-1 rounded-full">
+          <span
+            className="bg-lightBg dark:bg-darkBg p-1 rounded-full"
+            onClick={() => setShowDropDown(!showDropdown)}
+            ref={profileButtonRef}
+          >
             <FaUserCircle className="cursor-pointer text-2xl" />
           </span>
+
+          {/* Profile menu */}
+          {showDropdown && (
+            <div
+              className="absolute top-14 right-2 bg-lightBg hover:bg-lightSurface dark:bg-darkSurface hover:dark:bg-darkBg cursor-pointer px-3 py-2 rounded-md"
+              onClick={handleLogout}
+              ref={dropdownRef}
+            >
+              <button>Logout</button>
+            </div>
+          )}
         </div>
       </div>
 
