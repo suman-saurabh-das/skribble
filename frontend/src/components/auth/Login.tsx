@@ -1,9 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../../context/UserContext";
+// icons
 import { FiInfo } from "react-icons/fi";
 import { ImSpinner10 } from "react-icons/im";
-
 // types
 import type { loginFormData } from "../../utils/types";
 
@@ -13,13 +14,15 @@ const Login = () => {
     password: "",
   };
 
-  const navigate = useNavigate();
-
   const [formData, setFormData] = useState<loginFormData>(initialData);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
+  
+  const navigate = useNavigate();
+  const { setUserInfo } = useUser();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Setting value from input fields in formData
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -32,7 +35,7 @@ const Login = () => {
   const passwordPattern =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
 
-  // Validate form data
+  // Function to validate formData
   const validateFormData = (formData: loginFormData) => {
     if (!emailPattern.test(formData.email)) {
       setError("Please enter a valid email!");
@@ -48,20 +51,26 @@ const Login = () => {
     return true;
   };
 
+  // Validates formData, makes an API call to login user, sets userInfo in UserContext and redirects user to skribble home page
   const handleLoginSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validateFormData(formData)) {
       try {
         setLoading(true);
+
         const config = {
           headers: {
             "Content-type": "application/json",
           },
         };
         const res = await axios.post("/api/users/login", formData, config);
-        // Save user info to local storage
+        
+        // Save userInfo in context & local storage
+        setUserInfo(res.data);
         localStorage.setItem("userInfo", JSON.stringify(res.data));
+        
         setLoading(false);
+        
         // Navigate to skribble home page
         navigate("/skribble");
       } catch (error) {
@@ -73,7 +82,7 @@ const Login = () => {
     }
   };
 
-  // If user is loggedIn, navigate to skribble page.
+  // If user is already logged-in, navigate to skribble page
   useEffect(() => {
     const userInfo = localStorage.getItem("userInfo");
     if (userInfo) {
@@ -94,7 +103,7 @@ const Login = () => {
           name="email"
           type="text"
           value={formData.email}
-          onChange={handleChange}
+          onChange={handleInputChange}
           onFocus={() => setError("")}
         />
       </div>
@@ -106,7 +115,7 @@ const Login = () => {
           name="password"
           type="password"
           value={formData.password}
-          onChange={handleChange}
+          onChange={handleInputChange}
           onFocus={() => setError("")}
         />
       </div>
@@ -120,7 +129,7 @@ const Login = () => {
         type="submit"
         disabled={loading}
       >
-        {loading ? <ImSpinner10 className="animate-spin text-lg"/> : "Login"}
+        {loading ? <ImSpinner10 className="animate-spin text-lg" /> : "Login"}
       </button>
     </form>
   );

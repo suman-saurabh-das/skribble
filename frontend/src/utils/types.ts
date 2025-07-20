@@ -1,5 +1,14 @@
 import type { Dispatch, SetStateAction } from "react";
 
+export type userDataType = {
+  _id: string
+  pic: string;
+  name: string;
+  email: string;
+  token: string;
+  isAdmin: boolean;
+}
+
 export type scribbleDataType = {
   _id: string;
   title: string;
@@ -19,6 +28,11 @@ export type registerFormData = {
   confirmPassword: string;
   profilePic: string;
 };
+
+export type UserContextType = {
+  userInfo: userDataType | null;
+  setUserInfo: Dispatch<React.SetStateAction<userDataType | null>>;
+}
 
 export type ScribbleContextType = {
   scribbles: scribbleDataType[];

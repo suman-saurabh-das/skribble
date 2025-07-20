@@ -1,9 +1,10 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../../context/UserContext";
+// icons
 import { FiInfo } from "react-icons/fi";
 import { ImSpinner10 } from "react-icons/im";
-
 // types
 import type { registerFormData } from "../../utils/types";
 
@@ -16,13 +17,15 @@ const Register = () => {
     profilePic: "",
   };
 
-  const navigate = useNavigate();
-
   const [formData, setFormData] = useState<registerFormData>(initialData);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
+  
+  const navigate = useNavigate();
+  const { setUserInfo } = useUser();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Setting value from input fields in formData
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -36,7 +39,7 @@ const Register = () => {
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
   const imagePattern = /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp|svg))$/i;
 
-  // Validate form data
+  // Function to validate formData
   const validateFormData = (formData: registerFormData) => {
     if (!formData.name) {
       setError("Name is required!");
@@ -64,20 +67,26 @@ const Register = () => {
     return true;
   };
 
+  // Validates formData, makes an API call to register user, sets userInfo in UserContext and redirects user to skribble home page
   const handleRegisterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validateFormData(formData)) {
       try {
         setLoading(true);
+
         const config = {
           headers: {
             "Content-type": "application/json",
           },
         };
         const res = await axios.post("/api/users/", formData, config);
-        // Save user info to local storage
+
+        // Save userInfo in context & local storage
+        setUserInfo(res.data);
         localStorage.setItem("userInfo", JSON.stringify(res.data));
+
         setLoading(false);
+
         // Navigate to skribble home page
         navigate("/skribble");
       } catch (error) {
@@ -102,7 +111,7 @@ const Register = () => {
           name="name"
           type="text"
           value={formData.name}
-          onChange={handleChange}
+          onChange={handleInputChange}
           onFocus={() => setError("")}
         />
       </div>
@@ -114,7 +123,7 @@ const Register = () => {
           name="email"
           type="text"
           value={formData.email}
-          onChange={handleChange}
+          onChange={handleInputChange}
           onFocus={() => setError("")}
         />
       </div>
@@ -126,7 +135,7 @@ const Register = () => {
           name="password"
           type="password"
           value={formData.password}
-          onChange={handleChange}
+          onChange={handleInputChange}
           onFocus={() => setError("")}
         />
       </div>
@@ -138,7 +147,7 @@ const Register = () => {
           name="confirmPassword"
           type="password"
           value={formData.confirmPassword}
-          onChange={handleChange}
+          onChange={handleInputChange}
           onFocus={() => setError("")}
         />
       </div>
@@ -150,7 +159,7 @@ const Register = () => {
           name="profilePic"
           type="text"
           value={formData.profilePic}
-          onChange={handleChange}
+          onChange={handleInputChange}
           onFocus={() => setError("")}
         />
       </div>
@@ -164,7 +173,11 @@ const Register = () => {
         type="submit"
         disabled={loading}
       >
-        {loading ? <ImSpinner10 className="animate-spin text-lg"/> : "Register"}
+        {loading ? (
+          <ImSpinner10 className="animate-spin text-lg" />
+        ) : (
+          "Register"
+        )}
       </button>
     </form>
   );
