@@ -1,17 +1,16 @@
 import { Link } from "react-router-dom";
-import { useScribbles } from "../../context/ScribbleContext";
+import { useScribble } from "../../context/ScribbleContext";
+// components
+import SidebarCard from "./SidebarCard";
+// icons
 import { FiSearch } from "react-icons/fi";
 import { GiFeather } from "react-icons/gi";
 import { IoIosCloseCircleOutline } from "react-icons/io";
-
-// components
-import SidebarCard from "./SidebarCard";
-
 // types
 import type { SidebarProps } from "../../utils/types";
 
 const Sidebar = ({ showSidebar, setShowSidebar }: SidebarProps) => {
-  const { scribbles } = useScribbles();
+  const { scribbles } = useScribble();
 
   return (
     <div
@@ -31,9 +30,7 @@ const Sidebar = ({ showSidebar, setShowSidebar }: SidebarProps) => {
           {/* Close sidebar button (Only for small devices) */}
           <span
             className="xl:hidden"
-            onClick={() => {
-              setShowSidebar(false);
-            }}
+            onClick={() => {setShowSidebar(false);}}
           >
             <IoIosCloseCircleOutline className="text-3xl" />
           </span>

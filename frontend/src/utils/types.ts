@@ -39,7 +39,7 @@ export type ScribbleContextType = {
   setScribbles: Dispatch<React.SetStateAction<scribbleDataType[]>>;
 };
 
-export type ScribblesProps = {
+export type ScribblePageProps = {
   darkMode: boolean;
   setDarkMode: Dispatch<SetStateAction<boolean>>;
 };

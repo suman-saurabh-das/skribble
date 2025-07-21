@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
+// icons
 import { MdDeleteForever, MdOutlineEdit } from "react-icons/md";
-
 // types
 import type { SidebarCardProps } from "../../utils/types";
 
