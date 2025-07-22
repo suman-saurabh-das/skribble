@@ -1,14 +1,15 @@
 import { useRef } from "react";
+import { useState, useEffect } from "react";
+import { useUser } from "../../context/UserContext";
 import { Link, Outlet, useParams, useNavigate } from "react-router-dom";
+// icons
 import { FaRegEdit, FaUserCircle } from "react-icons/fa";
 import { GiFeather } from "react-icons/gi";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import { LuPanelLeftOpen } from "react-icons/lu";
 import { TbBulb } from "react-icons/tb";
 import { VscPreview } from "react-icons/vsc";
-
 // types
-import { useState, useEffect } from "react";
 import type { ScribbleContainerProps } from "../../utils/types";
 
 const ScribbleContainer = ({
@@ -17,16 +18,17 @@ const ScribbleContainer = ({
   showSidebar,
   setShowSidebar,
 }: ScribbleContainerProps) => {
-  const params = useParams();
-  const navigate = useNavigate();
-
   const [scribbleId, setScribbleId] = useState<string | undefined>(undefined);
   const [showDropdown, setShowDropDown] = useState(false);
+
+  const params = useParams();
+  const navigate = useNavigate();
+  const { setUserInfo } = useUser();
 
   const dropdownRef = useRef<HTMLDivElement>(null);
   const profileButtonRef = useRef<HTMLSpanElement>(null);
 
-  // Hide dropdown when clicked anywhere in the app.
+  // Hide dropdown when clicked anywhere in the app
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (
@@ -49,11 +51,16 @@ const ScribbleContainer = ({
   }, [showDropdown]);
 
   const handleLogout = () => {
+    // Remove userInfo from local storage & UserContext
     localStorage.removeItem("userInfo");
+    setUserInfo(null);
     setShowDropDown(false);
+    // Navigate user to login/register page, when user logs out!
     navigate("/");
   };
 
+  // useEffect to store the id of currently selected scribble using params
+  // scribbleId is used to show/hide the preview & edit buttons and for navigation
   useEffect(() => {
     if (params) {
       setScribbleId(params.id);

@@ -1,5 +1,5 @@
 const ScribbleEdit = () => {
-  return <div>Edit</div>;
+  return <div>Edit scribble</div>;
 };
 
 export default ScribbleEdit;
