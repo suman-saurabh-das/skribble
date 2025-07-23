@@ -6,7 +6,7 @@ import { useUser } from "../../context/UserContext";
 import { FiInfo } from "react-icons/fi";
 import { ImSpinner10 } from "react-icons/im";
 // types
-import type { registerFormData } from "../../utils/types";
+import type { RegisterFormData } from "../../utils/types";
 
 const Register = () => {
   const initialData = {
@@ -17,7 +17,7 @@ const Register = () => {
     profilePic: "",
   };
 
-  const [formData, setFormData] = useState<registerFormData>(initialData);
+  const [formData, setFormData] = useState<RegisterFormData>(initialData);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   
@@ -40,7 +40,7 @@ const Register = () => {
   const imagePattern = /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp|svg))$/i;
 
   // Function to validate formData
-  const validateFormData = (formData: registerFormData) => {
+  const validateFormData = (formData: RegisterFormData) => {
     if (!formData.name) {
       setError("Name is required!");
       return false;

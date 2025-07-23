@@ -2,12 +2,12 @@ import axios from "axios";
 import { useUser } from "./UserContext";
 import { createContext, useState, useEffect, useContext } from "react";
 // types
-import type { scribbleDataType, ScribbleContextType } from "../utils/types";
+import type { ScribbleData, ScribbleContext } from "../utils/types";
 
-const ScribbleContext = createContext<ScribbleContextType | undefined>(undefined);
+const ScribbleContext = createContext<ScribbleContext | undefined>(undefined);
 
 export const ScribbleContextProvider = ({children}: {children: React.ReactNode}) => {
-  const [scribbles, setScribbles] = useState<scribbleDataType[]>([]);
+  const [scribbles, setScribbles] = useState<ScribbleData[]>([]);
   
   // userInfo is used to get currently logged in user token
   // token is used for authorization & making API calls

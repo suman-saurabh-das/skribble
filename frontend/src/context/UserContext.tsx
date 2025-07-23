@@ -1,11 +1,11 @@
 import { createContext, useState, useEffect, useContext } from "react";
 // types
-import type { userDataType, UserContextType } from "../utils/types";
+import type { UserData, UserContext } from "../utils/types";
 
-const UserContext = createContext<UserContextType | undefined>(undefined);
+const UserContext = createContext<UserContext | undefined>(undefined);
 
 export const UserContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [userInfo, setUserInfo] = useState<userDataType | null>(null);
+  const [userInfo, setUserInfo] = useState<UserData | null>(null);
 
   // We are hydrating userInfo from local storage and setting it in context, because when user refreshes the app or re-opens the app without login/registering, then userInfo context is null.
   useEffect(() => {

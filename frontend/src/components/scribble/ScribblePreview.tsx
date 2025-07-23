@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useScribble } from "../../context/ScribbleContext";
 // types
-import type { scribbleDataType } from "../../utils/types";
+import type { ScribbleData } from "../../utils/types";
 
 const ScribblePreview = () => {
-  const [selectedScribble, setSelectedScribble] = useState<scribbleDataType | undefined>(undefined);
+  const [selectedScribble, setSelectedScribble] = useState<ScribbleData | undefined>(undefined);
   
   const params = useParams();
   const { scribbles } = useScribble();

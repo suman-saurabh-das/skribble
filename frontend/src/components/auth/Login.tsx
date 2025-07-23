@@ -6,7 +6,7 @@ import { useUser } from "../../context/UserContext";
 import { FiInfo } from "react-icons/fi";
 import { ImSpinner10 } from "react-icons/im";
 // types
-import type { loginFormData } from "../../utils/types";
+import type { LoginFormData } from "../../utils/types";
 
 const Login = () => {
   const initialData = {
@@ -14,7 +14,7 @@ const Login = () => {
     password: "",
   };
 
-  const [formData, setFormData] = useState<loginFormData>(initialData);
+  const [formData, setFormData] = useState<LoginFormData>(initialData);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   
@@ -36,7 +36,7 @@ const Login = () => {
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
 
   // Function to validate formData
-  const validateFormData = (formData: loginFormData) => {
+  const validateFormData = (formData: LoginFormData) => {
     if (!emailPattern.test(formData.email)) {
       setError("Please enter a valid email!");
       return false;

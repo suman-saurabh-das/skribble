@@ -1,6 +1,8 @@
 import type { Dispatch, SetStateAction } from "react";
 
-export type userDataType = {
+// USER CONTEXT TYPES
+
+export type UserData = {
   _id: string
   pic: string;
   name: string;
@@ -9,19 +11,44 @@ export type userDataType = {
   isAdmin: boolean;
 }
 
-export type scribbleDataType = {
+export type UserContext = {
+  userInfo: UserData | null;
+  setUserInfo: Dispatch<React.SetStateAction<UserData | null>>;
+}
+
+// SCRIBBLE CONTEXT TYPES
+
+export type ScribbleData = {
   _id: string;
   title: string;
   content: string;
   category: string;
 };
 
-export type loginFormData = {
+export type ScribbleContext = {
+  scribbles: ScribbleData[];
+  setScribbles: Dispatch<React.SetStateAction<ScribbleData[]>>;
+};
+
+// COMMON COMPONENT TYPES
+
+export type SidebarProps = {
+  showSidebar: boolean;
+  setShowSidebar: Dispatch<SetStateAction<boolean>>;
+};
+
+export type SidebarCardProps = {
+  scribble: ScribbleData;
+};
+
+// AUTH COMPONENT & AUTH PAGE TYPES
+
+export type LoginFormData = {
   email: string;
   password: string;
 }
 
-export type registerFormData = {
+export type RegisterFormData = {
   name: string;
   email: string;
   password: string;
@@ -29,15 +56,7 @@ export type registerFormData = {
   profilePic: string;
 };
 
-export type UserContextType = {
-  userInfo: userDataType | null;
-  setUserInfo: Dispatch<React.SetStateAction<userDataType | null>>;
-}
-
-export type ScribbleContextType = {
-  scribbles: scribbleDataType[];
-  setScribbles: Dispatch<React.SetStateAction<scribbleDataType[]>>;
-};
+// SCRIBBLE COMPONENT & SCRIBBLE PAGE TYPES
 
 export type ScribblePageProps = {
   darkMode: boolean;
@@ -49,13 +68,4 @@ export type ScribbleContainerProps = {
   darkMode: boolean;
   setShowSidebar: Dispatch<SetStateAction<boolean>>;
   setDarkMode: Dispatch<SetStateAction<boolean>>;
-};
-
-export type SidebarProps = {
-  showSidebar: boolean;
-  setShowSidebar: Dispatch<SetStateAction<boolean>>;
-};
-
-export type SidebarCardProps = {
-  scribble: scribbleDataType;
 };
