@@ -69,3 +69,9 @@ export type ScribbleContainerProps = {
   setShowSidebar: Dispatch<SetStateAction<boolean>>;
   setDarkMode: Dispatch<SetStateAction<boolean>>;
 };
+
+export type ScribbleFormData = {
+  title: string;
+  content: string;
+  category: string;
+}
