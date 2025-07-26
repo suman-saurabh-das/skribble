@@ -35,11 +35,18 @@ export type ScribbleContext = {
 export type SidebarProps = {
   showSidebar: boolean;
   setShowSidebar: Dispatch<SetStateAction<boolean>>;
+  setDeleteScribbleId: Dispatch<SetStateAction<string>>;
 };
 
 export type SidebarCardProps = {
   scribble: ScribbleData;
+  setDeleteScribbleId: Dispatch<SetStateAction<string>>;
 };
+
+export type ModalDeleteScribbleProps = {
+  deleteScribbleId: string;
+  setDeleteScribbleId: Dispatch<SetStateAction<string>>;
+}
 
 // AUTH COMPONENT & AUTH PAGE TYPES
 
