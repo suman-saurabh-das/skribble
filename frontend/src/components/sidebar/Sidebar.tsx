@@ -9,7 +9,11 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 // types
 import type { SidebarProps } from "../../utils/types";
 
-const Sidebar = ({ showSidebar, setShowSidebar }: SidebarProps) => {
+const Sidebar = ({
+  showSidebar,
+  setShowSidebar,
+  setDeleteScribbleId,
+}: SidebarProps) => {
   const { scribbles } = useScribble();
 
   return (
@@ -57,7 +61,11 @@ const Sidebar = ({ showSidebar, setShowSidebar }: SidebarProps) => {
           {/* Sidebar cards */}
           <div className="flex flex-col gap-2 px-2 overflow-y-auto">
             {scribbles.map((scribble) => (
-              <SidebarCard key={scribble._id} scribble={scribble} />
+              <SidebarCard
+                key={scribble._id}
+                scribble={scribble}
+                setDeleteScribbleId={setDeleteScribbleId}
+              />
             ))}
           </div>
         </div>

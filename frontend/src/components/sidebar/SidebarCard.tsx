@@ -4,7 +4,7 @@ import { MdDeleteForever, MdOutlineEdit } from "react-icons/md";
 // types
 import type { SidebarCardProps } from "../../utils/types";
 
-const SidebarCard = ({ scribble }: SidebarCardProps) => {
+const SidebarCard = ({ scribble, setDeleteScribbleId }: SidebarCardProps) => {
   return (
     <div className="hover:bg-lightHighlight hover:dark:bg-darkHighlight hover:cursor-pointer flex items-center justify-between px-3 rounded-md">
       {/* SidebarCard title */}
@@ -13,11 +13,14 @@ const SidebarCard = ({ scribble }: SidebarCardProps) => {
       </Link>
       {/* SidebarCard buttons */}
       <div className="flex justify-end items-center gap-2 text-lg w-[15%]">
-        <Link to={`/skribble/edit/${scribble._id}`} className="py-2 hover:text-bluePrimary">
+        <Link
+          to={`/skribble/edit/${scribble._id}`}
+          className="py-2 hover:text-bluePrimary"
+        >
           <MdOutlineEdit />
         </Link>
         <button
-          onClick={() => confirm("Are you sure you want to delete ?")}
+          onClick={() => setDeleteScribbleId(scribble._id)}
           className="py-2 hover:text-red-500"
         >
           <MdDeleteForever />
