@@ -1,3 +1,4 @@
+import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 // icons
 import { MdDeleteForever, MdOutlineEdit } from "react-icons/md";
@@ -5,8 +6,10 @@ import { MdDeleteForever, MdOutlineEdit } from "react-icons/md";
 import type { SidebarCardProps } from "../../utils/types";
 
 const SidebarCard = ({ scribble, setDeleteScribbleId }: SidebarCardProps) => {
+  const params = useParams()
+
   return (
-    <div className="hover:bg-lightHighlight hover:dark:bg-darkHighlight hover:cursor-pointer flex items-center justify-between px-3 rounded-md">
+    <div className={`${scribble._id === params.id ? "bg-lightHighlight dark:bg-darkBg" : ""} hover:bg-lightHighlight hover:dark:bg-darkHighlight hover:cursor-pointer flex items-center justify-between px-3 rounded-md`}>
       {/* SidebarCard title */}
       <Link to={`/skribble/preview/${scribble._id}`} className="py-2 w-[80%]">
         <h5 className="truncate">{scribble.title}</h5>

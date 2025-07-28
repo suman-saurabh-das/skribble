@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useScribble } from "../../context/ScribbleContext";
 // components
@@ -5,9 +6,10 @@ import SidebarCard from "./SidebarCard";
 // icons
 import { FiSearch } from "react-icons/fi";
 import { GiFeather } from "react-icons/gi";
-import { IoIosCloseCircleOutline } from "react-icons/io";
+import { IoClose } from "react-icons/io5";
+import { GoSidebarExpand } from "react-icons/go";
 // types
-import type { SidebarProps } from "../../utils/types";
+import type { SidebarProps, ScribbleData } from "../../utils/types";
 
 const Sidebar = ({
   showSidebar,
@@ -16,11 +18,36 @@ const Sidebar = ({
 }: SidebarProps) => {
   const { scribbles } = useScribble();
 
+  const [searchText, setSearchText] = useState<string>("");
+  const [filteredScribbles, setFilteredScribbles] = useState<ScribbleData[]>(
+    []
+  );
+
+  const handleFilterScribbles = () => {
+    if (searchText !== "") {
+      const updatedScribbles = scribbles.filter((scribble) =>
+        scribble.title.toLowerCase().includes(searchText.toLowerCase())
+      );
+      setFilteredScribbles(updatedScribbles);
+    } else {
+      setFilteredScribbles(scribbles);
+    }
+  };
+
+  useEffect(() => {
+    // Initialize filteredScribbles with scribbles data
+    if (scribbles) {
+      setFilteredScribbles(scribbles);
+    }
+    // Update filteredScribbles whenever user types in search
+    handleFilterScribbles();
+  }, [scribbles, searchText]);
+
   return (
     <div
       className={`${
         showSidebar ? "translate-x-0" : "-translate-x-80"
-      } absolute top-0 left-0 bg-lightBg dark:bg-darkBg transform transition-transform flex flex-col gap-4 min-h-screen overflow-y-auto w-80 duration-300 z-50`}
+      } absolute top-0 left-0 bg-lightBg dark:bg-darkBg transform transition-transform flex flex-col gap-4 min-h-screen overflow-y-auto w-80 duration-300 z-40`}
     >
       <div className="p-4">
         {/* App header */}
@@ -33,10 +60,12 @@ const Sidebar = ({
 
           {/* Close sidebar button (Only for small devices) */}
           <span
-            className="xl:hidden"
-            onClick={() => {setShowSidebar(false);}}
+            className="cursor-pointer xl:hidden"
+            onClick={() => {
+              setShowSidebar(false);
+            }}
           >
-            <IoIosCloseCircleOutline className="text-3xl" />
+            <GoSidebarExpand className="text-2xl" />
           </span>
         </div>
 
@@ -44,23 +73,30 @@ const Sidebar = ({
         <div
           className={`${
             scribbles.length > 0 && "gap-4 pb-4"
-          } bg-lightSurface dark:bg-darkSurface flex flex-col h-[calc(100vh-92px)] rounded-md`}
+          } bg-lightSurface dark:bg-darkSurface flex flex-col h-[calc(100vh-88px)] rounded-md`}
         >
           {/* Searchbar */}
           <div className="flex bg-lightHighlight dark:bg-darkHighlight rounded-md w-full">
             <input
               className="bg-transparent outline-none py-3 px-4 placeholder:text-neutral-900 dark:placeholder:text-neutral-400 w-[85%]"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setSearchText(e.target.value)
+              }
               placeholder="Search"
               type="text"
+              value={searchText}
             />
-            <div className="flex items-center justify-center text-xl text-neutral-900 dark:text-neutral-400 w-[15%]">
-              <FiSearch />
-            </div>
+            <button
+              className="flex items-center justify-center text-xl text-neutral-900 dark:text-neutral-400 w-[15%]"
+              onClick={() => setSearchText("")}
+            >
+              {searchText === "" ? <FiSearch /> : <IoClose />}
+            </button>
           </div>
 
           {/* Sidebar cards */}
           <div className="flex flex-col gap-2 px-2 overflow-y-auto">
-            {scribbles.map((scribble) => (
+            {filteredScribbles.map((scribble) => (
               <SidebarCard
                 key={scribble._id}
                 scribble={scribble}
