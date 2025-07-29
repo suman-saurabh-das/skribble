@@ -23,6 +23,8 @@ export type ScribbleData = {
   title: string;
   content: string;
   category: string;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type ScribbleContext = {
