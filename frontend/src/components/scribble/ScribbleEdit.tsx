@@ -6,6 +6,7 @@ import { useScribble } from "../../context/ScribbleContext";
 import ReactMarkdown from "react-markdown";
 // icons
 import { FiInfo } from "react-icons/fi";
+import { AiTwotoneDelete } from "react-icons/ai";
 // types
 import type { ScribbleFormData } from "../../utils/types";
 
@@ -75,11 +76,7 @@ const ScribbleEdit = () => {
             Authorization: `Bearer ${userInfo.token}`,
           },
         };
-        await axios.put(
-          `/api/scribbles/edit/${params.id}`,
-          formData,
-          config
-        );
+        await axios.put(`/api/scribbles/edit/${params.id}`, formData, config);
         const updatedScribbles = scribbles.map((scribble) => {
           if (scribble._id === params.id) {
             return {
@@ -96,6 +93,15 @@ const ScribbleEdit = () => {
         console.error("Failed to create scribble:", error);
       }
     }
+  };
+
+  const handleResetFields = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setFormData({
+      title: "",
+      content: "",
+      category: "",
+    });
   };
 
   return (
@@ -134,33 +140,55 @@ const ScribbleEdit = () => {
               Scribble content
             </label>
             <textarea
-              className="bg-lightHighlight dark:bg-darkHighlight dark:bg- border border-lightSurface dark:border-darkSurface outline-none px-4 py-2 rounded-md min-h-80"
+              className="bg-lightHighlight dark:bg-darkHighlight dark:bg- border border-lightSurface dark:border-darkSurface outline-none px-4 py-2 rounded-md h-[calc(100vh-375px)]"
               name="content"
               onChange={(e) => handleInputChange(e)}
               onFocus={() => setError("")}
               value={formData.content}
             />
           </div>
-          {error && (
-            <p className="flex gap-1 items-start text-red-500">
-              <FiInfo className="flex-shrink-0 mt-[3px]" /> {error}
-            </p>
-          )}
-          <button
-            className="bg-lightSurface hover:bg-lightBg dark:bg-darkSurface hover:dark:bg-darkBg cursor-pointer px-3 py-2 rounded-md"
-            type="submit"
-            onClick={handleEditScribble}
-          >
-            Submit
-          </button>
+
+          <div>
+            {error ? (
+              <p className="bg-lightHighlight dark:bg-darkHighlight cursor-pointer px-3 py-2 rounded-md flex gap-1 text-red-600">
+                <FiInfo className="flex-shrink-0 mt-[2.8px]" /> {error}
+              </p>
+            ) : (
+              <div className="flex gap-2 items-center">
+                <button
+                  className="bg-lightSurface hover:bg-lightBg dark:bg-darkSurface hover:dark:bg-darkBg cursor-pointer px-3 py-2 rounded-md w-full"
+                  type="submit"
+                  onClick={handleEditScribble}
+                >
+                  Edit scribble
+                </button>
+                <button
+                  className="bg-lightSurface hover:bg-lightBg dark:bg-darkSurface hover:dark:bg-darkBg cursor-pointer px-3 py-2 rounded-md text-xl"
+                  onClick={handleResetFields}
+                >
+                  <AiTwotoneDelete />
+                </button>
+              </div>
+            )}
+          </div>
         </form>
       </div>
 
       {/* Live preview */}
       <div className="sm:w-1/2">
-        <div className="prose dark:prose-invert h-[calc(100vh-122px)] overflow-y-scroll pr-2 max-w-none w-full">
-          <ReactMarkdown>{formData.content}</ReactMarkdown>
-        </div>
+        {/* 
+          In order to allow the markdown syntax to provide the styles prevent tailwind.css from overwriting it, I have installed a package called @tailwindcss/typography
+          This package provides a prose class, which removes the tailwind styles
+        */}
+        {!formData.content ? (
+          <p className="font-shantel-sans text-center">
+            Start writing content to see live preview !
+          </p>
+        ) : (
+          <div className="prose dark:prose-invert overflow-y-scroll pr-2 max-w-none w-full sm:h-[calc(100vh-130px)]">
+            <ReactMarkdown>{formData.content}</ReactMarkdown>
+          </div>
+        )}
       </div>
     </div>
   );
