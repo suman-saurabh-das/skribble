@@ -2,13 +2,15 @@ import { useRef } from "react";
 import { useState, useEffect } from "react";
 import { useUser } from "../../context/UserContext";
 import { Link, Outlet, useParams, useNavigate } from "react-router-dom";
+// components
+import MarkdownGuideModal from "../common/MarkdownGuideModal";
 // icons
-import { FaRegEdit, FaUserCircle } from "react-icons/fa";
 import { GiFeather } from "react-icons/gi";
-import { IoMdAddCircleOutline } from "react-icons/io";
-import { LuPanelLeftOpen } from "react-icons/lu";
-import { TbBulb } from "react-icons/tb";
-import { VscPreview } from "react-icons/vsc";
+import { GoSidebarExpand } from "react-icons/go";
+import { VscNewFile, VscOpenPreview } from "react-icons/vsc";
+import { CiEdit } from "react-icons/ci";
+import { TbBulb, TbHelp  } from "react-icons/tb";
+import { FaUserCircle } from "react-icons/fa";
 // types
 import type { ScribbleContainerProps } from "../../utils/types";
 
@@ -19,7 +21,9 @@ const ScribbleContainer = ({
   setShowSidebar,
 }: ScribbleContainerProps) => {
   const [scribbleId, setScribbleId] = useState<string | undefined>(undefined);
-  const [showDropdown, setShowDropDown] = useState(false);
+  const [showDropdown, setShowDropDown] = useState<boolean>(false);
+  const [showMarkdownGuideModal, setShowMarkdownGuideModal] =
+    useState<boolean>(false);
 
   const params = useParams();
   const navigate = useNavigate();
@@ -85,9 +89,9 @@ const ScribbleContainer = ({
             className="bg-lightBg hover:bg-lightHover dark:bg-darkBg hover:dark:bg-darkHighlight dark:hover:bg-lightHover p-2 rounded-md"
             onClick={() => setShowSidebar(!showSidebar)}
           >
-            <LuPanelLeftOpen
+            <GoSidebarExpand
               className={`${
-                showSidebar && "-scale-x-100"
+                !showSidebar && "-scale-x-100"
               } duration-500 text-xl transition-transform`}
             />
           </button>
@@ -96,12 +100,12 @@ const ScribbleContainer = ({
           <Link
             to={"/skribble/create"}
             className={`${
-              "create" === "create"
+              window.location.pathname.includes("create")
                 ? "bg-lightHover dark:bg-darkHighlight"
                 : "bg-lightBg dark:bg-darkBg"
             } hover:bg-lightHover dark:hover:bg-darkHighlight cursor-pointer duration-100 flex items-center gap-2 p-2 rounded-md w-fit`}
           >
-            <IoMdAddCircleOutline className="text-xl" />
+            <VscNewFile className="text-xl" />
             <span className="hidden md:block">New scribble</span>
           </Link>
 
@@ -110,12 +114,12 @@ const ScribbleContainer = ({
             <Link
               to={`/skribble/preview/${scribbleId}`}
               className={`${
-                "preview" === "preview"
+                window.location.pathname.includes("preview")
                   ? "bg-lightHover dark:bg-darkHighlight"
                   : "bg-lightBg dark:bg-darkBg"
               } hover:bg-lightHover dark:hover:bg-darkHighlight cursor-pointer duration-100 flex items-center gap-2 p-2 rounded-md w-fit`}
             >
-              <VscPreview className="text-xl" />
+              <VscOpenPreview className="text-xl" />
               <span className="hidden md:block">Preview scribble</span>
             </Link>
           )}
@@ -125,12 +129,12 @@ const ScribbleContainer = ({
             <Link
               to={`/skribble/edit/${scribbleId}`}
               className={`${
-                "edit" === "edit"
+                window.location.pathname.includes("edit")
                   ? "bg-lightHover dark:bg-darkHighlight"
                   : "bg-lightBg dark:bg-darkBg"
               } hover:bg-lightHover dark:hover:bg-darkHighlight cursor-pointer duration-100 flex items-center gap-2 p-2 rounded-md w-fit`}
             >
-              <FaRegEdit className="text-xl" />
+              <CiEdit className="text-xl" />
               <span className="hidden md:block">Edit scribble</span>
             </Link>
           )}
@@ -139,14 +143,21 @@ const ScribbleContainer = ({
         {/* Right nav-menu */}
         <div className="flex gap-2 sm:gap-4 items-center relative">
           {/* Dark/light mode button */}
-          <span className="bg-lightBg dark:bg-darkBg p-1 rounded-full">
+          <button className="bg-lightBg dark:bg-darkBg p-1 rounded-full text-neutral-600">
             <TbBulb
               className={`${
-                darkMode ? "hover:text-yellow-400" : "hover:text-neutral-600"
-              } cursor-pointer text-2xl`}
+                darkMode ? "dark:hover:text-yellow-400" : "hover:text-neutral-800"
+              } cursor-pointer dark:text-white text-2xl`}
               onClick={() => setDarkMode(!darkMode)}
             />
-          </span>
+          </button>
+
+          <button
+            className="bg-lightBg dark:bg-darkBg p-1 rounded-full"
+            onClick={() => setShowMarkdownGuideModal(true)}
+          >
+            <TbHelp className="cursor-pointer text-2xl" />{" "}
+          </button>
 
           {/* User profile button */}
           <span
@@ -171,9 +182,15 @@ const ScribbleContainer = ({
       </div>
 
       {/* ScribbleContainer Content */}
-      <div className="bg-lightHighlight dark:bg-darkHighlight mt-4 p-4 rounded-md h-[calc(100vh-90px)] overflow-y-auto">
+      <div className="bg-lightHighlight dark:bg-darkHighlight mt-4 p-4 rounded-md h-[calc(100vh-85px)] overflow-y-auto">
         <Outlet />
       </div>
+
+      {showMarkdownGuideModal && (
+        <MarkdownGuideModal
+          setShowMarkdownGuideModal={setShowMarkdownGuideModal}
+        />
+      )}
     </div>
   );
 };

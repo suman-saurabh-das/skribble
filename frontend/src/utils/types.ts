@@ -50,6 +50,10 @@ export type ModalDeleteScribbleProps = {
   setDeleteScribbleId: Dispatch<SetStateAction<string>>;
 }
 
+export type MarkdownGuideModalProps = {
+  setShowMarkdownGuideModal: Dispatch<SetStateAction<boolean>>;
+}
+
 // AUTH COMPONENT & AUTH PAGE TYPES
 
 export type LoginFormData = {
