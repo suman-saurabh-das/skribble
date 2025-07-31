@@ -38,7 +38,7 @@ const ScribblePreview = () => {
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl">{selectedScribble.title}</h1>
-        <span className="bg-lightBg dark:bg-darkBg px-4 py-1 rounded-md dark:text-white w-fit">
+        <span className="bg-lightBg dark:bg-darkBg px-4 py-2 rounded-md dark:text-white w-fit">
           {selectedScribble.category}
         </span>
       </div>

@@ -97,24 +97,20 @@ const ScribbleEdit = () => {
 
   const handleResetFields = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    setFormData({
-      title: "",
-      content: "",
-      category: "",
-    });
+    setFormData(initialData);
   };
 
   return (
     <div className="flex flex-col sm:flex-row gap-16 sm:gap-8">
       {/* Create scribble form */}
       <div className="sm:w-1/2">
-        <form className="flex flex-col gap-4" action="">
+        <form className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">
             <label className="font-semibold" htmlFor="title">
               Scribble title
             </label>
             <input
-              className="bg-lightHighlight dark:bg-darkHighlight dark:bg- border border-lightSurface dark:border-darkSurface outline-none px-4 py-2 rounded-md"
+              className="bg-lightSurface dark:bg-darkSurface border border-lightSurface dark:border-darkSurface outline-none px-4 py-2 rounded-md"
               name="title"
               onChange={(e) => handleInputChange(e)}
               onFocus={() => setError("")}
@@ -127,7 +123,7 @@ const ScribbleEdit = () => {
               Scribble category
             </label>
             <input
-              className="bg-lightHighlight dark:bg-darkHighlight dark:bg- border border-lightSurface dark:border-darkSurface outline-none px-4 py-2 rounded-md"
+              className="bg-lightSurface dark:bg-darkSurface border border-lightSurface dark:border-darkSurface outline-none px-4 py-2 rounded-md"
               name="category"
               onChange={(e) => handleInputChange(e)}
               onFocus={() => setError("")}
@@ -140,7 +136,7 @@ const ScribbleEdit = () => {
               Scribble content
             </label>
             <textarea
-              className="bg-lightHighlight dark:bg-darkHighlight dark:bg- border border-lightSurface dark:border-darkSurface outline-none px-4 py-2 rounded-md h-[calc(100vh-375px)]"
+              className="bg-lightSurface dark:bg-darkSurface border border-lightSurface dark:border-darkSurface outline-none px-4 py-2 rounded-md h-[calc(100vh-365px)]"
               name="content"
               onChange={(e) => handleInputChange(e)}
               onFocus={() => setError("")}
@@ -150,20 +146,20 @@ const ScribbleEdit = () => {
 
           <div>
             {error ? (
-              <p className="bg-lightHighlight dark:bg-darkHighlight cursor-pointer px-3 py-2 rounded-md flex gap-1 text-red-600">
+              <p className="bg-lightSurface dark:bg-darkBg font-semibold flex gap-1 px-3 py-[10px] rounded-md text-red-600 dark:text-red-500">
                 <FiInfo className="flex-shrink-0 mt-[2.8px]" /> {error}
               </p>
             ) : (
               <div className="flex gap-2 items-center">
                 <button
-                  className="bg-lightSurface hover:bg-lightBg dark:bg-darkSurface hover:dark:bg-darkBg cursor-pointer px-3 py-2 rounded-md w-full"
+                  className="bg-lightSurface hover:bg-lightBg dark:bg-darkSurface hover:dark:bg-darkBg cursor-pointer px-3 py-[10px] rounded-md w-full"
                   type="submit"
                   onClick={handleEditScribble}
                 >
                   Edit scribble
                 </button>
                 <button
-                  className="bg-lightSurface hover:bg-lightBg dark:bg-darkSurface hover:dark:bg-darkBg cursor-pointer px-3 py-2 rounded-md text-xl"
+                  className="bg-lightSurface hover:bg-lightBg dark:bg-darkSurface hover:dark:bg-darkBg cursor-pointer px-3 py-[10px] rounded-md text-xl"
                   onClick={handleResetFields}
                 >
                   <AiTwotoneDelete />

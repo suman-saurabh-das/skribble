@@ -14,7 +14,7 @@ const Register = () => {
     email: "",
     password: "",
     confirmPassword: "",
-    profilePic: "",
+    pic: "",
   };
 
   const [formData, setFormData] = useState<RegisterFormData>(initialData);
@@ -59,8 +59,8 @@ const Register = () => {
       setError("Passwords do not match!");
       return false;
     }
-    if (formData.profilePic && !imagePattern.test(formData.profilePic)) {
-      setError("Entered link is not valid!");
+    if (formData.pic && !imagePattern.test(formData.pic)) {
+      setError("Image link is not valid!");
       return false;
     }
     setError("");
@@ -156,9 +156,9 @@ const Register = () => {
         <input
           className="bg-white border border-neutral-300 outline-none px-4 py-2 rounded-full"
           id="profile-picture"
-          name="profilePic"
+          name="pic"
           type="text"
-          value={formData.profilePic}
+          value={formData.pic}
           onChange={handleInputChange}
           onFocus={() => setError("")}
         />
