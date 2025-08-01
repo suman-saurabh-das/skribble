@@ -25,7 +25,7 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
       default:
-        "https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_1280.png",
+        "https://res.cloudinary.com/dgfxugcho/image/upload/v1753734601/user-profile_rxyk67.webp",
     },
   },
   {
