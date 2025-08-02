@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 // pages
 import Auth from "./pages/Auth";
 import Scribbles from "./pages/Scribble";
+import Profile from "./pages/Profile";
 // components
 import ScribbleCreate from "./components/scribble/ScribbleCreate";
 import ScribblePreview from "./components/scribble/ScribblePreview";
@@ -16,6 +17,7 @@ function App() {
       <div className={`${darkMode ? "dark" : ""} bg-white font-open-sans text-sm w-full`}>
         <Routes>
           <Route path="/" element={<Auth />} />
+          <Route path="/profile" element={<Profile />} />
           <Route
             path="skribble"
             element={<Scribbles darkMode={darkMode} setDarkMode={setDarkMode} />}

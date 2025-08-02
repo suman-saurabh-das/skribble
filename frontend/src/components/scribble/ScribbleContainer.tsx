@@ -8,9 +8,9 @@ import MarkdownGuideModal from "../common/MarkdownGuideModal";
 import { GiFeather } from "react-icons/gi";
 import { GoSidebarExpand } from "react-icons/go";
 import { VscNewFile, VscOpenPreview } from "react-icons/vsc";
-import { CiEdit } from "react-icons/ci";
-import { TbBulb, TbHelp  } from "react-icons/tb";
-import { FaUserCircle } from "react-icons/fa";
+import { CiEdit, CiUser, CiLogout } from "react-icons/ci";
+import { TbBulb } from "react-icons/tb";
+import { IoHelpCircleOutline } from "react-icons/io5";
 // types
 import type { ScribbleContainerProps } from "../../utils/types";
 
@@ -27,7 +27,7 @@ const ScribbleContainer = ({
 
   const params = useParams();
   const navigate = useNavigate();
-  const { setUserInfo } = useUser();
+  const { userInfo, setUserInfo } = useUser();
 
   const dropdownRef = useRef<HTMLDivElement>(null);
   const profileButtonRef = useRef<HTMLSpanElement>(null);
@@ -141,22 +141,20 @@ const ScribbleContainer = ({
         </div>
 
         {/* Right nav-menu */}
-        <div className="flex gap-2 sm:gap-4 items-center relative">
+        <div className="flex gap-2 sm:gap-3 items-center relative">
           {/* Dark/light mode button */}
-          <button className="bg-lightBg dark:bg-darkBg p-1 rounded-full text-neutral-600">
+          <button className="bg-lightBg dark:bg-darkBg p-1 rounded-full text-neutral-700 hover:text-neutral-900 dark:text-white">
             <TbBulb
-              className={`${
-                darkMode ? "dark:hover:text-yellow-400" : "hover:text-neutral-800"
-              } cursor-pointer dark:text-white text-2xl`}
+              className="cursor-pointer p-[2px] hover:text-neutral-800 dark:hover:text-yellow-400 text-2xl"
               onClick={() => setDarkMode(!darkMode)}
             />
           </button>
 
           <button
-            className="bg-lightBg dark:bg-darkBg p-1 rounded-full"
+            className="bg-lightBg dark:bg-darkBg p-1 rounded-full text-neutral-700 hover:text-neutral-900 dark:text-white"
             onClick={() => setShowMarkdownGuideModal(true)}
           >
-            <TbHelp className="cursor-pointer text-2xl" />{" "}
+            <IoHelpCircleOutline className="cursor-pointer text-2xl" />{" "}
           </button>
 
           {/* User profile button */}
@@ -165,17 +163,32 @@ const ScribbleContainer = ({
             onClick={() => setShowDropDown(!showDropdown)}
             ref={profileButtonRef}
           >
-            <FaUserCircle className="cursor-pointer text-2xl" />
+            <img
+              className="cursor-pointer rounded-full h-[24px] w-[24px]"
+              src={userInfo?.pic || "/user-profile.webp"}
+              alt={userInfo?.name}
+            />
           </span>
 
           {/* Profile menu */}
           {showDropdown && (
             <div
-              className="absolute top-14 right-2 bg-lightBg hover:bg-lightSurface dark:bg-darkSurface hover:dark:bg-darkBg cursor-pointer px-3 py-2 rounded-md"
-              onClick={handleLogout}
               ref={dropdownRef}
+              className="absolute top-[62px] right-3 bg-lightBg flex flex-col rounded-lg w-40"
             >
-              <button>Logout</button>
+              <Link
+                className="bg-lightBg hover:bg-lightSurface dark:bg-darkSurface hover:dark:bg-darkBg cursor-pointer flex gap-1 items-center px-3 py-2 rounded-t-md"
+                to={"/profile"}
+              >
+                <CiUser className="text-xl" /> Your Profile
+              </Link>
+              <hr />
+              <span
+                className="bg-lightBg hover:bg-lightSurface dark:bg-darkSurface hover:dark:bg-darkBg cursor-pointer flex gap-1 items-center px-3 py-2 rounded-b-md"
+                onClick={handleLogout}
+              >
+                <CiLogout className="text-xl" /> Logout
+              </span>
             </div>
           )}
         </div>

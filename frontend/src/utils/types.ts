@@ -66,7 +66,7 @@ export type RegisterFormData = {
   email: string;
   password: string;
   confirmPassword: string;
-  profilePic: string;
+  pic: string;
 };
 
 // SCRIBBLE COMPONENT & SCRIBBLE PAGE TYPES
@@ -87,4 +87,14 @@ export type ScribbleFormData = {
   title: string;
   content: string;
   category: string;
+}
+
+// PROFILE PAGE TYPES
+
+export type ProfileData = {
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  pic: string;
 }
