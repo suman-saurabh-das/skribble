@@ -6,11 +6,17 @@ const connectDB = require("./config/db"); // Import fn to connect to mongoDB
 const userRoutes = require("./routes/userRoutes");
 const scribbleRoutes = require("./routes/scribbleRoutes");
 const { notFound, errorHandler } = require("./middlewares/errorMiddleware");
+const cors = require('cors');
 
 const app = express(); // Create an Express application instance
 connectDB(); // Connect to mongoDB
 
 app.use(express.json()); // Adding middleware express.json() to access data from req body
+
+app.use(cors({
+  origin: 'https://skribbles.netlify.app/', // frontend URL
+  credentials: true
+}));
 
 // GET route for root path
 app.get("/", (req, res) => {
