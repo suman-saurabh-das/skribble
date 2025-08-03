@@ -78,7 +78,7 @@ const UpdateProfile = () => {
             Authorization: `Bearer ${userInfo.token}`,
           },
         };
-        const res = await axios.post("/api/users/profile", formData, config);
+        const res = await axios.post("https://skribble-api.onrender.com/api/users/profile", formData, config);
         
         // Save userInfo in context & local storage
         setUserInfo(res.data);

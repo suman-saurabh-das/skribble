@@ -79,7 +79,7 @@ const Register = () => {
             "Content-type": "application/json",
           },
         };
-        const res = await axios.post("/api/users/", formData, config);
+        const res = await axios.post("https://skribble-api.onrender.com/api/users/", formData, config);
 
         // Save userInfo in context & local storage
         setUserInfo(res.data);

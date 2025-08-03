@@ -61,7 +61,7 @@ const ScribbleCreate = () => {
             Authorization: `Bearer ${userInfo.token}`,
           },
         };
-        const res = await axios.post("/api/scribbles/create", formData, config);
+        const res = await axios.post("https://skribble-api.onrender.com/api/scribbles/create", formData, config);
         setScribbles([...scribbles, res.data]);
       } catch (error) {
         console.error("Failed to create scribble:", error);

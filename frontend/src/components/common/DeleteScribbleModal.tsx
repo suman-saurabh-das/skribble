@@ -21,7 +21,7 @@ const DeleteScribbleModal = ({
             Authorization: `Bearer ${userInfo.token}`,
           },
         };
-        axios.delete(`/api/scribbles/delete/${deleteScribbleId}`, config);
+        axios.delete(`https://skribble-api.onrender.com/api/scribbles/delete/${deleteScribbleId}`, config);
         const updatedScribbles = scribbles.filter(
           (scribble) => scribble._id !== deleteScribbleId
         );

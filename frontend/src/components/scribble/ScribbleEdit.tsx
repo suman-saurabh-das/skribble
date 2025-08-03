@@ -76,7 +76,7 @@ const ScribbleEdit = () => {
             Authorization: `Bearer ${userInfo.token}`,
           },
         };
-        await axios.put(`/api/scribbles/edit/${params.id}`, formData, config);
+        await axios.put(`https://skribble-api.onrender.com/api/scribbles/edit/${params.id}`, formData, config);
         const updatedScribbles = scribbles.map((scribble) => {
           if (scribble._id === params.id) {
             return {
