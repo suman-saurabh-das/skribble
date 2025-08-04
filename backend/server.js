@@ -11,12 +11,27 @@ const cors = require('cors');
 const app = express(); // Create an Express application instance
 connectDB(); // Connect to mongoDB
 
-app.use(cors({
-  origin: 'https://skribbles.netlify.app', // frontend URL
-  credentials: true
-}));
+const allowedOrigins = [
+  'https://skribbles.netlify.app',
+  'https://skribble-ui.onrender.com'
+];
 
-app.use(express.json()); // Adding middleware express.json() to access data from req body
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('CORS not allowed for this origin: ' + origin));
+    }
+  },
+  credentials: true
+};
+
+// Enabling CORS
+app.use(cors(corsOptions));
+
+// Adding middleware express.json() to access data from req body
+app.use(express.json());
 
 // GET route for root path
 app.get("/", (req, res) => {
