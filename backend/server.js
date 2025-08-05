@@ -12,6 +12,7 @@ const app = express(); // Create an Express application instance
 connectDB(); // Connect to mongoDB
 
 const allowedOrigins = [
+  'http://localhost:5173',
   'https://skribbles.netlify.app',
   'https://skribble-ui.onrender.com'
 ];
