@@ -110,7 +110,7 @@ const ScribbleCreate = () => {
               Scribble content
             </label>
             <textarea
-              className="bg-lightSurface dark:bg-darkSurface border border-lightSurface dark:border-darkSurface outline-none px-4 py-2 rounded-md h-[calc(100vh-365px)]"
+              className="bg-lightSurface dark:bg-darkSurface border border-lightSurface dark:border-darkSurface outline-none px-4 py-2 rounded-md h-[calc(100vh-373px)]"
               name="content"
               onChange={(e) => handleInputChange(e)}
               onFocus={() => setError("")}
@@ -157,7 +157,7 @@ const ScribbleCreate = () => {
             </p>
           </div>
         ) : (
-          <div className="prose dark:prose-invert sm:h-[calc(100vh-130px)] overflow-y-scroll pr-2 max-w-none w-full">
+          <div className="prose dark:prose-invert sm:h-[calc(100vh-102px)] overflow-y-scroll pr-2 max-w-none w-full">
             <ReactMarkdown>{formData.content}</ReactMarkdown>
           </div>
         )}

@@ -14,7 +14,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className={`${darkMode ? "dark" : ""} bg-white font-open-sans text-sm w-full`}>
+      <div className={`${darkMode ? "dark" : ""} bg-white font-open-sans w-full`}>
         <Routes>
           <Route path="/" element={<Auth />} />
           <Route path="/profile" element={<Profile />} />

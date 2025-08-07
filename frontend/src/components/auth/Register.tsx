@@ -100,7 +100,7 @@ const Register = () => {
 
   return (
     <form
-      className="font-medium flex flex-col gap-4 p-8 sm:p-4 text-[13px]"
+      className="font-medium flex flex-col gap-4 p-8 sm:p-4 sm:text-[13px]"
       onSubmit={(e) => handleRegisterSubmit(e)}
     >
       <div className="flex flex-col gap-1">

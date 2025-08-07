@@ -8,7 +8,7 @@ const Auth = () => {
   return (
     <div className="bg-white flex flex-col md:flex-row items-center justify-evenly min-h-screen text-black lg:px-28 mx-auto max-w-screen-2xl">
       {/* Hero container */}
-      <div className="mt-8 mb-12 relative w-[80%] md:w-[40%] lg:w-[50%]">
+      <div className="mt-8 mb-12 relative w-[80%] md:w-[40%]">
         <h1 className="font-bold relative top-2 md:top-0 lg:top-10 text-4xl">
           Goodbye !<br /> book & pen
         </h1>
@@ -20,7 +20,7 @@ const Auth = () => {
       </div>
 
       {/* Registration/Login container */}
-      <div className="w-full md:w-[40%] lg:w-[30%]">
+      <div className="w-full md:w-[40%] xl:w-[30%] my-8">
         <div className="bg-blue-100 font-semibold flex gap-6 justify-evenly mx-auto p-2 rounded-full text-[13px] w-fit">
           <button
             className={`${

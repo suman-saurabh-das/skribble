@@ -72,7 +72,7 @@ const ScribbleContainer = ({
   }, [params.id]);
 
   return (
-    <div className="bg-lightSurface dark:bg-darkSurface p-4 min-h-screen overflow-y-auto w-full">
+    <div className="bg-lightSurface dark:bg-darkSurface p-3 h-screen overflow-y-auto w-full">
       {/* Navbar */}
       <div className="flex items-center justify-between">
         {/* Left nav-menu */}
@@ -103,7 +103,7 @@ const ScribbleContainer = ({
               window.location.pathname.includes("create")
                 ? "bg-lightHover dark:bg-darkHighlight"
                 : "bg-lightBg dark:bg-darkBg"
-            } hover:bg-lightHover dark:hover:bg-darkHighlight cursor-pointer duration-100 flex items-center gap-2 p-2 rounded-md w-fit`}
+            } hover:bg-lightHover dark:hover:bg-darkHighlight cursor-pointer duration-100 flex items-center gap-2 px-2 py-[6px] rounded-md w-fit`}
           >
             <VscNewFile className="text-xl" />
             <span className="hidden md:block">New scribble</span>
@@ -117,7 +117,7 @@ const ScribbleContainer = ({
                 window.location.pathname.includes("preview")
                   ? "bg-lightHover dark:bg-darkHighlight"
                   : "bg-lightBg dark:bg-darkBg"
-              } hover:bg-lightHover dark:hover:bg-darkHighlight cursor-pointer duration-100 flex items-center gap-2 p-2 rounded-md w-fit`}
+              } hover:bg-lightHover dark:hover:bg-darkHighlight cursor-pointer duration-100 flex items-center gap-2 px-2 py-[6px] rounded-md w-fit`}
             >
               <VscOpenPreview className="text-xl" />
               <span className="hidden md:block">Preview scribble</span>
@@ -132,7 +132,7 @@ const ScribbleContainer = ({
                 window.location.pathname.includes("edit")
                   ? "bg-lightHover dark:bg-darkHighlight"
                   : "bg-lightBg dark:bg-darkBg"
-              } hover:bg-lightHover dark:hover:bg-darkHighlight cursor-pointer duration-100 flex items-center gap-2 p-2 rounded-md w-fit`}
+              } hover:bg-lightHover dark:hover:bg-darkHighlight cursor-pointer duration-100 flex items-center gap-2 px-2 py-[6px] rounded-md w-fit`}
             >
               <CiEdit className="text-xl" />
               <span className="hidden md:block">Edit scribble</span>
@@ -145,16 +145,16 @@ const ScribbleContainer = ({
           {/* Dark/light mode button */}
           <button className="bg-lightBg dark:bg-darkBg p-1 rounded-full text-neutral-700 hover:text-neutral-900 dark:text-white">
             <TbBulb
-              className="cursor-pointer p-[2px] hover:text-neutral-800 dark:hover:text-yellow-400 text-2xl"
+              className="cursor-pointer hover:text-neutral-800 dark:hover:text-yellow-400 text-2xl"
               onClick={() => setDarkMode(!darkMode)}
             />
           </button>
 
           <button
-            className="bg-lightBg dark:bg-darkBg p-1 rounded-full text-neutral-700 hover:text-neutral-900 dark:text-white"
+            className="bg-lightBg dark:bg-darkBg p-[2px] rounded-full text-neutral-700 hover:text-neutral-900 dark:text-white"
             onClick={() => setShowMarkdownGuideModal(true)}
           >
-            <IoHelpCircleOutline className="cursor-pointer text-2xl" />{" "}
+            <IoHelpCircleOutline className="cursor-pointer text-3xl" />{" "}
           </button>
 
           {/* User profile button */}
@@ -164,7 +164,7 @@ const ScribbleContainer = ({
             ref={profileButtonRef}
           >
             <img
-              className="cursor-pointer rounded-full h-[24px] w-[24px]"
+              className="cursor-pointer rounded-full h-[28px] w-[28px]"
               src={userInfo?.pic || "/user-profile.webp"}
               alt={userInfo?.name}
             />
@@ -177,17 +177,17 @@ const ScribbleContainer = ({
               className="absolute top-[62px] right-3 bg-lightBg flex flex-col rounded-lg w-40"
             >
               <Link
-                className="bg-lightBg hover:bg-lightSurface dark:bg-darkSurface hover:dark:bg-darkBg cursor-pointer flex gap-1 items-center px-3 py-2 rounded-t-md"
+                className="bg-lightBg hover:bg-lightSurface dark:bg-darkSurface hover:dark:bg-darkBg cursor-pointer flex gap-2 items-center px-3 py-2 rounded-t-md"
                 to={"/profile"}
               >
-                <CiUser className="text-xl" /> Your Profile
+                <CiUser className="text-2xl" /> Your Profile
               </Link>
               <hr />
               <span
-                className="bg-lightBg hover:bg-lightSurface dark:bg-darkSurface hover:dark:bg-darkBg cursor-pointer flex gap-1 items-center px-3 py-2 rounded-b-md"
+                className="bg-lightBg hover:bg-lightSurface dark:bg-darkSurface hover:dark:bg-darkBg cursor-pointer flex gap-2 items-center px-3 py-2 rounded-b-md"
                 onClick={handleLogout}
               >
-                <CiLogout className="text-xl" /> Logout
+                <CiLogout className="text-2xl" /> Logout
               </span>
             </div>
           )}
@@ -195,7 +195,7 @@ const ScribbleContainer = ({
       </div>
 
       {/* ScribbleContainer Content */}
-      <div className="bg-lightHighlight dark:bg-darkHighlight mt-4 p-4 rounded-md h-[calc(100vh-85px)] overflow-y-auto">
+      <div className="bg-lightHighlight dark:bg-darkHighlight mt-3 p-3 rounded-md h-[calc(100vh-77px)] overflow-y-auto">
         <Outlet />
       </div>
 
