@@ -7,7 +7,7 @@ import ModalDeleteScribble from "../components/common/DeleteScribbleModal";
 import type { ScribblePageProps } from "../utils/types";
 
 const Scribbles = ({ darkMode, setDarkMode }: ScribblePageProps) => {
-  const [showSidebar, setShowSidebar] = useState<boolean>(true);
+  const [showSidebar, setShowSidebar] = useState<boolean>(window.innerWidth < 640 ? false : true);
   const [deleteScribbleId, setDeleteScribbleId] = useState<string>("");
 
   return (

@@ -43,6 +43,7 @@ export type SidebarProps = {
 export type SidebarCardProps = {
   scribble: ScribbleData;
   setDeleteScribbleId: Dispatch<SetStateAction<string>>;
+  setShowSidebar: Dispatch<SetStateAction<boolean>>;
 };
 
 export type ModalDeleteScribbleProps = {

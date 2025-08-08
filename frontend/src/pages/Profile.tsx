@@ -13,24 +13,24 @@ const Profile = () => {
 
   return (
     <div className="bg-lightHighlight dark:bg-darkHighlight min-h-screen">
-      <div className="flex flex-col xl:flex-row gap-16 py-8 px-12 relative text-black dark:text-white mx-auto max-w-[1920px] xl:h-[calc(100vh-35px)]">
+      <div className="flex flex-col xl:flex-row gap-16 py-8 px-4 lg:px-12 relative text-black dark:text-white mx-auto max-w-[1920px] xl:h-[calc(100vh-35px)]">
         {/* User profile info & update form */}
         <div className="xl:w-2/5">
           <div className="flex gap-4 items-center">
             <img
-              className="w-28 rounded-full"
+              className="w-16 sm:w-28 rounded-full"
               src={userInfo?.pic}
               alt="User"
             />
             <div className="flex flex-col gap-2">
-              <h4 className="font-shantel-sans text-3xl">
+              <h4 className="font-shantel-sans text-xl sm:text-3xl lg:text-2xl">
                 Welcome <span className="font-medium">{userInfo?.name}</span>!
               </h4>
               <Link
                 to={"/skribble"}
                 className="flex gap-1 items-center underline"
               >
-                <IoArrowBackCircleOutline className="text-2xl" /> view Skribbles
+                <IoArrowBackCircleOutline className="text-xl sm:text-2xl" /> view Skribbles
               </Link>
             </div>
           </div>
@@ -40,7 +40,7 @@ const Profile = () => {
         </div>
 
         {/* Application guide */}
-        <div className="bg-lightSurface dark:bg-darkSurface font-shantel-sans flex flex-col gap-8 xl:h-[calc(100vh-55px)] max-h-fit p-8 rounded-lg overflow-y-auto xl:w-3/5">
+        <div className="bg-lightSurface dark:bg-darkSurface font-shantel-sans flex flex-col gap-8 xl:h-[calc(100vh-55px)] max-h-fit p-4 lg:p-8 rounded-lg overflow-y-auto xl:w-3/5">
           <div className="flex flex-col gap-4">
             <h2 className="flex gap-2 font-bold text-3xl">
               About Skribble <GiFeather />

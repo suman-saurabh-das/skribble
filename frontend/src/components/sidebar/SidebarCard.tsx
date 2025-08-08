@@ -5,11 +5,26 @@ import { MdDeleteForever, MdOutlineEdit } from "react-icons/md";
 // types
 import type { SidebarCardProps } from "../../utils/types";
 
-const SidebarCard = ({ scribble, setDeleteScribbleId }: SidebarCardProps) => {
-  const params = useParams()
+const SidebarCard = ({
+  scribble,
+  setDeleteScribbleId,
+  setShowSidebar,
+}: SidebarCardProps) => {
+  const params = useParams();
+
+  const closeSideBarForMobile = () => {
+    if (window.innerWidth < 640) {
+      setShowSidebar(false);
+    }
+  };
 
   return (
-    <div className={`${scribble._id === params.id ? "bg-lightHighlight dark:bg-darkBg" : ""} hover:bg-lightHighlight hover:dark:bg-darkHighlight hover:cursor-pointer flex items-center justify-between px-3 rounded-md`}>
+    <div
+      className={`${
+        scribble._id === params.id ? "bg-lightHighlight dark:bg-darkBg" : ""
+      } hover:bg-lightHighlight hover:dark:bg-darkHighlight hover:cursor-pointer flex items-center justify-between px-3 rounded-md`}
+      onClick={closeSideBarForMobile}
+    >
       {/* SidebarCard title */}
       <Link to={`/skribble/preview/${scribble._id}`} className="py-2 w-[80%]">
         <h5 className="truncate">{scribble.title}</h5>

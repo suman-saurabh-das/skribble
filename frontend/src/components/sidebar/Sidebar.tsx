@@ -101,6 +101,7 @@ const Sidebar = ({
                 key={scribble._id}
                 scribble={scribble}
                 setDeleteScribbleId={setDeleteScribbleId}
+                setShowSidebar={setShowSidebar}
               />
             ))}
           </div>
