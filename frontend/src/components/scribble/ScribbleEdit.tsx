@@ -66,7 +66,7 @@ const ScribbleEdit = () => {
 
   const handleEditScribble = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("FORM DATA:", formData);
+    // console.log("FORM DATA:", formData);
 
     if (userInfo && validateFormData(formData)) {
       try {
@@ -181,7 +181,7 @@ const ScribbleEdit = () => {
             Start writing content to see live preview !
           </p>
         ) : (
-          <div className="prose dark:prose-invert overflow-y-scroll pr-2 max-w-none w-full sm:h-[calc(100vh-102px)]">
+          <div className="prose dark:prose-invert overflow-y-scroll pr-2 max-w-none w-full sm:h-[calc(100vh-102px)] [&_pre]:whitespace-pre-wrap [&_pre]:break-words [&_pre]:overflow-x-auto">
             <ReactMarkdown>{formData.content}</ReactMarkdown>
           </div>
         )}

@@ -51,7 +51,7 @@ const ScribbleCreate = () => {
 
   const handleCreateScribble = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("FORM DATA:", formData);
+    // console.log("FORM DATA:", formData);
 
     if (userInfo && validateFormData(formData)) {
       try {
@@ -157,7 +157,7 @@ const ScribbleCreate = () => {
             </p>
           </div>
         ) : (
-          <div className="prose dark:prose-invert sm:h-[calc(100vh-102px)] overflow-y-scroll pr-2 max-w-none w-full">
+          <div className="prose dark:prose-invert sm:h-[calc(100vh-102px)] overflow-y-scroll pr-2 max-w-none w-full [&_pre]:whitespace-pre-wrap [&_pre]:break-words">
             <ReactMarkdown>{formData.content}</ReactMarkdown>
           </div>
         )}

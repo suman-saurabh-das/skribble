@@ -47,7 +47,7 @@ const ScribblePreview = () => {
         In order to allow the markdown syntax to provide the styles prevent tailwind.css from overwriting it, I have installed a package called @tailwindcss/typography.
         This package provides a prose class, which removes the tailwind styles.
       */}
-      <div className="prose dark:prose-invert overflow-y-scroll pr-2 max-w-none w-full">
+      <div className="prose dark:prose-invert overflow-y-scroll pr-2 max-w-none w-full [&_pre]:whitespace-pre-wrap [&_pre]:break-words [&_pre]:overflow-x-auto">
         <ReactMarkdown>{selectedScribble.content}</ReactMarkdown>
       </div>
       <hr />

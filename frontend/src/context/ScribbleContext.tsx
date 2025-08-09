@@ -27,7 +27,7 @@ export const ScribbleContextProvider = ({children}: {children: React.ReactNode})
 
       const res = await axios.get("https://skribble-api.onrender.com/api/scribbles", config);
       if (res.data) {
-        console.log("FETCH ALL SCRIBBLES :", res.data);
+        // console.log("FETCH ALL SCRIBBLES :", res.data);
         setScribbles(res.data);
       }
     } catch (error) {
