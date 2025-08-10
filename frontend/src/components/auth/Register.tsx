@@ -100,13 +100,13 @@ const Register = () => {
 
   return (
     <form
-      className="font-medium flex flex-col gap-4 p-8 sm:p-4 sm:text-[13px]"
+      className="font-medium flex flex-col gap-4 p-8 sm:p-4 sm:text-sm"
       onSubmit={(e) => handleRegisterSubmit(e)}
     >
       <div className="flex flex-col gap-1">
         <label htmlFor="name">Name</label>
         <input
-          className="bg-white border border-neutral-300 outline-none px-4 py-2 rounded-full"
+          className="bg-white border border-blue-100 outline-none px-4 py-2 rounded-md"
           id="name"
           name="name"
           type="text"
@@ -118,7 +118,7 @@ const Register = () => {
       <div className="flex flex-col gap-1">
         <label htmlFor="email">Email address</label>
         <input
-          className="bg-white border border-neutral-300 outline-none px-4 py-2 rounded-full"
+          className="bg-white border border-blue-100 outline-none px-4 py-2 rounded-md"
           id="email"
           name="email"
           type="text"
@@ -130,7 +130,7 @@ const Register = () => {
       <div className="flex flex-col gap-1">
         <label htmlFor="password">Password</label>
         <input
-          className="bg-white border border-neutral-300 outline-none px-4 py-2 rounded-full"
+          className="bg-white border border-blue-100 outline-none px-4 py-2 rounded-md"
           id="password"
           name="password"
           type="password"
@@ -142,7 +142,7 @@ const Register = () => {
       <div className="flex flex-col gap-1">
         <label htmlFor="confirm-password">Confirm Password</label>
         <input
-          className="bg-white border border-neutral-300 outline-none px-4 py-2 rounded-full"
+          className="bg-white border border-blue-100 outline-none px-4 py-2 rounded-md"
           id="confirmPassword"
           name="confirmPassword"
           type="password"
@@ -154,7 +154,7 @@ const Register = () => {
       <div className="flex flex-col gap-1">
         <label htmlFor="profile-picture">Profile Picture</label>
         <input
-          className="bg-white border border-neutral-300 outline-none px-4 py-2 rounded-full"
+          className="bg-white border border-blue-100 outline-none px-4 py-2 rounded-md"
           id="profile-picture"
           name="pic"
           type="text"
@@ -169,7 +169,7 @@ const Register = () => {
         </p>
       )}
       <button
-        className="bg-bluePrimary hover:bg-blueSecondary font-semibold flex items-center justify-center mt-2 p-3 rounded-full text-white w-32"
+        className="bg-bluePrimary hover:bg-blueSecondary font-semibold flex items-center justify-center mt-2 p-3 rounded-md text-white w-32"
         type="submit"
         disabled={loading}
       >

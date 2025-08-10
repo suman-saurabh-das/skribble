@@ -21,13 +21,13 @@ const Auth = () => {
 
       {/* Registration/Login container */}
       <div className="w-full md:w-[40%] xl:w-[30%] my-8">
-        <div className="bg-blue-100 font-semibold flex gap-6 justify-evenly mx-auto p-2 rounded-full text-[13px] w-fit">
+        <div className="bg-blue-50 border border-blue-100 font-semibold flex gap-6 justify-evenly mx-auto p-[6px] rounded-md text-sm w-fit">
           <button
             className={`${
               currentForm === "login"
                 ? "bg-bluePrimary text-white"
                 : "text-blue-900"
-            } p-3 rounded-full w-32`}
+            } p-3 rounded-md w-32`}
             onClick={() => setCurrentForm("login")}
           >
             Login
@@ -37,7 +37,7 @@ const Auth = () => {
               currentForm === "register"
                 ? "bg-bluePrimary text-white"
                 : "text-blue-900"
-            } p-3 rounded-full w-32`}
+            } p-3 rounded-md w-32`}
             onClick={() => setCurrentForm("register")}
           >
             Register
