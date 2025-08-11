@@ -2,9 +2,10 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../context/UserContext";
+// components
+import Loader from "../common/Loader";
 // icons
 import { FiInfo } from "react-icons/fi";
-import { ImSpinner10 } from "react-icons/im";
 // types
 import type { RegisterFormData } from "../../utils/types";
 
@@ -173,11 +174,7 @@ const Register = () => {
         type="submit"
         disabled={loading}
       >
-        {loading ? (
-          <ImSpinner10 className="animate-spin text-lg" />
-        ) : (
-          "Register"
-        )}
+        {loading ? <Loader /> : "Register"}
       </button>
     </form>
   );

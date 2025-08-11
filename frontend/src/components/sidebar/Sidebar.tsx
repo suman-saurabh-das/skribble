@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useScribble } from "../../context/ScribbleContext";
 // components
+import Loader from "../common/Loader";
 import SidebarCard from "./SidebarCard";
 // icons
 import { FiSearch } from "react-icons/fi";
@@ -16,7 +17,7 @@ const Sidebar = ({
   setShowSidebar,
   setDeleteScribbleId,
 }: SidebarProps) => {
-  const { scribbles } = useScribble();
+  const { scribbles, isLoading } = useScribble();
 
   const [searchText, setSearchText] = useState<string>("");
   const [filteredScribbles, setFilteredScribbles] = useState<ScribbleData[]>(
@@ -96,14 +97,20 @@ const Sidebar = ({
 
           {/* Sidebar cards */}
           <div className="flex flex-col gap-2 px-2 overflow-y-auto">
-            {filteredScribbles.map((scribble) => (
-              <SidebarCard
-                key={scribble._id}
-                scribble={scribble}
-                setDeleteScribbleId={setDeleteScribbleId}
-                setShowSidebar={setShowSidebar}
-              />
-            ))}
+            {isLoading ? (
+              <div className="my-6">
+                <Loader size="text-2xl" />
+              </div>
+            ) : (
+              filteredScribbles.map((scribble) => (
+                <SidebarCard
+                  key={scribble._id}
+                  scribble={scribble}
+                  setDeleteScribbleId={setDeleteScribbleId}
+                  setShowSidebar={setShowSidebar}
+                />
+              ))
+            )}
           </div>
         </div>
       </div>

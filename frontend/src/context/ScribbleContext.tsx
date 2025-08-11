@@ -8,6 +8,8 @@ const ScribbleContext = createContext<ScribbleContext | undefined>(undefined);
 
 export const ScribbleContextProvider = ({children}: {children: React.ReactNode}) => {
   const [scribbles, setScribbles] = useState<ScribbleData[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
   
   // userInfo is used to get currently logged in user token
   // token is used for authorization & making API calls
@@ -18,6 +20,7 @@ export const ScribbleContextProvider = ({children}: {children: React.ReactNode})
     // Proxy needs to be configured to prevent CORS error
     // In Vite, the proxy setting needs to be configured in vite.config.ts file
     try {
+      setIsLoading(true);
       // Using the token from userInfo to validate user and make API calls
       const config = {
         headers: {
@@ -31,7 +34,12 @@ export const ScribbleContextProvider = ({children}: {children: React.ReactNode})
         setScribbles(res.data);
       }
     } catch (error) {
-      console.error("Failed to fetch scribbles:", error);
+      if (axios.isAxiosError(error)) {
+        setError(error.response?.data?.message || error.message)
+      }
+      setError("Oops! Something went wrong");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -44,7 +52,7 @@ export const ScribbleContextProvider = ({children}: {children: React.ReactNode})
   }, [userInfo]);
 
   return (
-    <ScribbleContext.Provider value={{ scribbles, setScribbles }}>
+    <ScribbleContext.Provider value={{ isLoading, error, scribbles, setScribbles }}>
       {children}
     </ScribbleContext.Provider>
   );

@@ -28,11 +28,17 @@ export type ScribbleData = {
 };
 
 export type ScribbleContext = {
+  isLoading: boolean;
+  error: string;
   scribbles: ScribbleData[];
   setScribbles: Dispatch<React.SetStateAction<ScribbleData[]>>;
 };
 
 // COMMON COMPONENT TYPES
+
+export type LoaderProps = {
+  size?: string;
+}
 
 export type SidebarProps = {
   showSidebar: boolean;

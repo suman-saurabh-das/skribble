@@ -133,7 +133,7 @@ const ScribbleCreate = () => {
                   Create scribble
                 </button>
                 <button
-                  className="bg-lightSurface hover:bg-lightBg dark:bg-darkSurface hover:dark:bg-darkBg cursor-pointer px-3 py-[10px] rounded-md text-xl"
+                  className="bg-lightSurface hover:bg-lightBg dark:bg-darkSurface hover:dark:bg-darkBg cursor-pointer px-3 py-[10px] rounded-md text-xl hover:text-red-500"
                   onClick={handleResetFields}
                 >
                   <AiTwotoneDelete />

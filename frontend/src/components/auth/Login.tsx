@@ -2,9 +2,10 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../context/UserContext";
+// components
+import Loader from "../common/Loader";
 // icons
 import { FiInfo } from "react-icons/fi";
-import { ImSpinner10 } from "react-icons/im";
 // types
 import type { LoginFormData } from "../../utils/types";
 
@@ -129,7 +130,7 @@ const Login = () => {
         type="submit"
         disabled={loading}
       >
-        {loading ? <ImSpinner10 className="animate-spin text-lg" /> : "Login"}
+        {loading ? <Loader /> : "Login"}
       </button>
     </form>
   );
