@@ -42,16 +42,16 @@ const ScribblePreview = () => {
           {selectedScribble.category}
         </span>
       </div>
-      <hr />
+      <hr className="border-gray-300 dark:border-gray-600" />
       {/* 
         In order to allow the markdown syntax to provide the styles prevent tailwind.css from overwriting it, I have installed a package called @tailwindcss/typography.
         This package provides a prose class, which removes the tailwind styles.
       */}
-      <div className="prose dark:prose-invert overflow-y-scroll pr-2 max-w-none w-full [&_pre]:whitespace-pre-wrap [&_pre]:break-words [&_pre]:overflow-x-auto">
+      <div className="prose dark:prose-invert overflow-y-scroll pr-2 max-w-none w-full [&_pre]:whitespace-pre-wrap [&_pre]:break-words [&_pre]:overflow-x-auto [&_pre]:bg-lightSurface [&_pre]:dark:bg-darkSurface [&_pre]:text-black [&_pre]:dark:text-white">
         <ReactMarkdown>{selectedScribble.content}</ReactMarkdown>
       </div>
-      <hr />
-      <div className="flex flex-col gap-2 text-sm text-neutral-500">
+      <hr className="border-gray-300 dark:border-gray-600" />
+      <div className="flex flex-col gap-2 text-sm text-neutral-500 dark:text-neutral-400">
         <p>Updated on: {new Date(selectedScribble.updatedAt).toLocaleString()}</p>
         <p>Created on: {new Date(selectedScribble.createdAt).toLocaleString()}</p>
       </div>

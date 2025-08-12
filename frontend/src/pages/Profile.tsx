@@ -18,7 +18,7 @@ const Profile = () => {
         <div className="xl:w-2/5">
           <div className="flex gap-4 items-center">
             <img
-              className="w-16 sm:w-28 rounded-full"
+              className="w-16 sm:w-24 rounded-full"
               src={userInfo?.pic}
               alt="User"
             />

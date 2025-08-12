@@ -126,14 +126,14 @@ const ScribbleCreate = () => {
             ) : (
               <div className="flex gap-2 items-center">
                 <button
-                  className="bg-lightSurface hover:bg-lightBg dark:bg-darkSurface hover:dark:bg-darkBg cursor-pointer px-3 py-[10px] rounded-md w-full"
+                  className="bg-lightSurface hover:bg-lightBg dark:bg-darkSurface hover:dark:bg-darkBg cursor-pointer duration-300 px-3 py-[10px] rounded-md transition-all w-full"
                   type="submit"
                   onClick={handleCreateScribble}
                 >
                   Create scribble
                 </button>
                 <button
-                  className="bg-lightSurface hover:bg-lightBg dark:bg-darkSurface hover:dark:bg-darkBg cursor-pointer px-3 py-[10px] rounded-md text-xl hover:text-red-500"
+                  className="bg-lightSurface hover:bg-lightBg dark:bg-darkSurface hover:dark:bg-darkBg cursor-pointer duration-300 px-3 py-[10px] rounded-md text-xl hover:text-red-500 transition-all"
                   onClick={handleResetFields}
                 >
                   <AiTwotoneDelete />
@@ -157,7 +157,7 @@ const ScribbleCreate = () => {
             </p>
           </div>
         ) : (
-          <div className="prose dark:prose-invert sm:h-[calc(100vh-102px)] overflow-y-scroll pr-2 max-w-none w-full [&_pre]:whitespace-pre-wrap [&_pre]:break-words">
+          <div className="prose dark:prose-invert sm:h-[calc(100vh-102px)] overflow-y-scroll pr-2 max-w-none w-full [&_pre]:whitespace-pre-wrap [&_pre]:break-words [&_pre]:bg-lightSurface [&_pre]:dark:bg-darkSurface [&_pre]:text-black [&_pre]:dark:text-white">
             <ReactMarkdown>{formData.content}</ReactMarkdown>
           </div>
         )}

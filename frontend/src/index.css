@@ -28,8 +28,8 @@ input:-webkit-autofill {
 @media (min-width: 768px) {
   /* For WebKit browsers (Chrome, Edge, Safari) */
   ::-webkit-scrollbar {
-    width: 4px; /* Narrow scrollbar width */
-    height: 4px; /* Narrow scrollbar height for horizontal scrollbars */
+    width: 5px; /* Narrow scrollbar width */
+    height: 5px; /* Narrow scrollbar height for horizontal scrollbars */
   }
   ::-webkit-scrollbar-thumb {
     background-color: rgb(177, 177, 177); /* Dark gray color */

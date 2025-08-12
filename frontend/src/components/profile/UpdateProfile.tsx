@@ -173,14 +173,14 @@ const UpdateProfile = () => {
         ) : (
           <div className="flex gap-2 items-center">
             <button
-              className="bg-lightSurface hover:bg-lightBg dark:bg-darkSurface hover:dark:bg-darkBg cursor-pointer px-3 py-[10px] rounded-md w-full"
+              className="bg-lightSurface hover:bg-lightBg dark:bg-darkSurface hover:dark:bg-darkBg cursor-pointer duration-300 px-3 py-[10px] rounded-md w-full transition-all"
               type="submit"
               onClick={handleUpdateProfile}
             >
               Update profile
             </button>
             <button
-              className="bg-lightSurface hover:bg-lightBg dark:bg-darkSurface hover:dark:bg-darkBg cursor-pointer px-3 py-[10px] rounded-md text-xl"
+              className="bg-lightSurface hover:bg-lightBg dark:bg-darkSurface hover:dark:bg-darkBg cursor-pointer duration-300 px-3 py-[10px] rounded-md text-xl hover:text-red-500 transition-all"
               onClick={handleResetFields}
             >
               <AiTwotoneDelete />
