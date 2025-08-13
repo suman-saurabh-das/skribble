@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import { useUser } from "../../context/UserContext";
 import { useScribble } from "../../context/ScribbleContext";
 import ReactMarkdown from "react-markdown";
+// components
+import Loader from "../common/Loader";
 // icons
 import { FiInfo } from "react-icons/fi";
 import { AiTwotoneDelete } from "react-icons/ai";
@@ -19,6 +21,7 @@ const ScribbleEdit = () => {
 
   const [formData, setFormData] = useState<ScribbleFormData>(initialData);
   const [error, setError] = useState<string>("");
+  const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
 
   const params = useParams();
   const { userInfo } = useUser();
@@ -69,6 +72,7 @@ const ScribbleEdit = () => {
     // console.log("FORM DATA:", formData);
 
     if (userInfo && validateFormData(formData)) {
+      setIsFormSubmitting(true);
       try {
         const config = {
           headers: {
@@ -76,7 +80,11 @@ const ScribbleEdit = () => {
             Authorization: `Bearer ${userInfo.token}`,
           },
         };
-        await axios.put(`https://skribble-api.onrender.com/api/scribbles/edit/${params.id}`, formData, config);
+        await axios.put(
+          `https://skribble-api.onrender.com/api/scribbles/edit/${params.id}`,
+          formData,
+          config
+        );
         const updatedScribbles = scribbles.map((scribble) => {
           if (scribble._id === params.id) {
             return {
@@ -90,7 +98,13 @@ const ScribbleEdit = () => {
         });
         setScribbles(updatedScribbles);
       } catch (error) {
-        console.error("Failed to create scribble:", error);
+        if (axios.isAxiosError(error)) {
+          setError(error.response?.data?.message || error.message);
+        } else {
+          console.error("Failed to update scribble:", error);
+        }
+      } finally {
+        setIsFormSubmitting(false);
       }
     }
   };
@@ -146,17 +160,18 @@ const ScribbleEdit = () => {
 
           <div>
             {error ? (
-              <p className="bg-lightSurface dark:bg-darkBg font-semibold flex gap-1 px-3 py-[10px] rounded-md text-red-600 dark:text-red-500">
+              <p className="bg-lightSurface dark:bg-darkBg flex gap-1 px-3 py-[10px] rounded-md text-red-600 dark:text-red-500">
                 <FiInfo className="flex-shrink-0 mt-[2.8px]" /> {error}
               </p>
             ) : (
               <div className="flex gap-2 items-center">
                 <button
-                  className="bg-lightSurface hover:bg-lightBg dark:bg-darkSurface hover:dark:bg-darkBg cursor-pointer duration-300 px-3 py-[10px] rounded-md transition-all w-full"
-                  type="submit"
+                  className="bg-lightSurface hover:bg-lightBg dark:bg-darkSurface hover:dark:bg-darkBg cursor-pointer disabled:cursor-not-allowed duration-300 px-3 py-[10px] rounded-md transition-all w-full"
+                  disabled={isFormSubmitting}
                   onClick={handleEditScribble}
+                  type="submit"
                 >
-                  Update scribble
+                  {isFormSubmitting ? <Loader /> : "Update scribble"}
                 </button>
                 <button
                   className="bg-lightSurface hover:bg-lightBg dark:bg-darkSurface hover:dark:bg-darkBg cursor-pointer duration-300 px-3 py-[10px] rounded-md text-xl hover:text-red-500 transition-all"

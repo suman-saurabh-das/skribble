@@ -3,6 +3,8 @@ import { useState } from "react";
 import { useUser } from "../../context/UserContext";
 import { useScribble } from "../../context/ScribbleContext";
 import ReactMarkdown from "react-markdown";
+// components
+import Loader from "../common/Loader";
 // icons
 import { FiInfo } from "react-icons/fi";
 import { AiTwotoneDelete } from "react-icons/ai";
@@ -18,6 +20,7 @@ const ScribbleCreate = () => {
 
   const [formData, setFormData] = useState<ScribbleFormData>(initialData);
   const [error, setError] = useState<string>("");
+  const [isFormSubmitting, setIsFormSubmitting] = useState<boolean>(false);
 
   const { userInfo } = useUser();
   const { scribbles, setScribbles } = useScribble();
@@ -54,6 +57,7 @@ const ScribbleCreate = () => {
     // console.log("FORM DATA:", formData);
 
     if (userInfo && validateFormData(formData)) {
+      setIsFormSubmitting(true);
       try {
         const config = {
           headers: {
@@ -61,10 +65,20 @@ const ScribbleCreate = () => {
             Authorization: `Bearer ${userInfo.token}`,
           },
         };
-        const res = await axios.post("https://skribble-api.onrender.com/api/scribbles/create", formData, config);
+        const res = await axios.post(
+          "https://skribble-api.onrender.com/api/scribbles/create",
+          formData,
+          config
+        );
         setScribbles([...scribbles, res.data]);
       } catch (error) {
-        console.error("Failed to create scribble:", error);
+        if (axios.isAxiosError(error)) {
+          setError(error.response?.data?.message || error.message);
+        } else {
+          console.error("Failed to create scribble:", error);
+        }
+      } finally {
+        setIsFormSubmitting(false);
       }
     }
   };
@@ -120,17 +134,18 @@ const ScribbleCreate = () => {
 
           <div>
             {error ? (
-              <p className="bg-lightSurface dark:bg-darkSurface font-semibold flex gap-1 px-3 py-[10px] rounded-md text-red-600 dark:text-red-500">
+              <p className="bg-lightSurface dark:bg-darkSurface flex gap-1 px-3 py-[10px] rounded-md text-red-600 dark:text-red-500">
                 <FiInfo className="flex-shrink-0 mt-[2.8px]" /> {error}
               </p>
             ) : (
               <div className="flex gap-2 items-center">
                 <button
-                  className="bg-lightSurface hover:bg-lightBg dark:bg-darkSurface hover:dark:bg-darkBg cursor-pointer duration-300 px-3 py-[10px] rounded-md transition-all w-full"
-                  type="submit"
+                  className="bg-lightSurface hover:bg-lightBg dark:bg-darkSurface hover:dark:bg-darkBg cursor-pointer disabled:cursor-not-allowed duration-300 px-3 py-[10px] rounded-md transition-all w-full"
+                  disabled={isFormSubmitting}
                   onClick={handleCreateScribble}
+                  type="submit"
                 >
-                  Create scribble
+                  {isFormSubmitting ? <Loader /> : "Create scribble"}
                 </button>
                 <button
                   className="bg-lightSurface hover:bg-lightBg dark:bg-darkSurface hover:dark:bg-darkBg cursor-pointer duration-300 px-3 py-[10px] rounded-md text-xl hover:text-red-500 transition-all"

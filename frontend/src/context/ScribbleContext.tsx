@@ -36,8 +36,9 @@ export const ScribbleContextProvider = ({children}: {children: React.ReactNode})
     } catch (error) {
       if (axios.isAxiosError(error)) {
         setError(error.response?.data?.message || error.message)
+      } else {
+        setError("Oops! Something went wrong");
       }
-      setError("Oops! Something went wrong");
     } finally {
       setIsLoading(false);
     }
