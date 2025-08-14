@@ -13,7 +13,7 @@ connectDB(); // Connect to mongoDB
 
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://skribbles.netlify.app',
+  'https://skribble-xyz.netlify.app',
   'https://skribble-ui.onrender.com'
 ];
 
